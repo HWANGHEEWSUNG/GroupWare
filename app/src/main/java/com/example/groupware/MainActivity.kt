@@ -35,8 +35,8 @@ import com.example.groupware.entryScreen.EntryScreen
 import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.mainScreen.MainScreen
 import com.example.groupware.profileScreen.ProfileScreen
+import com.example.groupware.shopScreen.ShopScreen
 import com.example.groupware.ui.theme.GroupWareTheme
-import java.time.LocalDate
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +67,8 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("mainScreen") { MainScreen(navController) }
                 composable("profileScreen") { ProfileScreen(navController) }
                 composable("gymScreen") { GymScreen(navController) }
+                composable("shopScreen") { ShopScreen(navController) }
+
             }
         }
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -116,8 +118,8 @@ fun BottomNavigationBar(navController: NavHostController) {
                 icon = {
                     val icon = when (item.route) {
                         "mainScreen" -> Icons.Filled.Home
-                        "calendarScreen/${LocalDate.now()}" -> Icons.Filled.Event
-                        "graphScreen" -> Icons.Filled.ShowChart // GMobiledata 아이콘 대신 ShowChart 사용
+                        "gymScreen" -> Icons.Filled.Event
+                        "shopScreen" -> Icons.Filled.ShowChart // GMobiledata 아이콘 대신 ShowChart 사용
                         "profileScreen" -> Icons.Filled.Person
                         else -> null
                     }
