@@ -23,7 +23,7 @@ import androidx.navigation.NavController
 import com.example.groupware.R
 
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun UserProfileScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()

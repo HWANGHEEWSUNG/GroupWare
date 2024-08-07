@@ -37,7 +37,9 @@ import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.loginScreen.LoginScreen
 import com.example.groupware.loginScreen.RegisterScreen
 import com.example.groupware.mainScreen.MainScreen
+import com.example.groupware.managerScreen.ManagerScreen
 import com.example.groupware.profileScreen.ProfileScreen
+import com.example.groupware.profileScreen.UserProfileScreen
 import com.example.groupware.ui.theme.GroupWareTheme
 
 class MainActivity : ComponentActivity() {
@@ -72,6 +74,9 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("favoriteScreen") { FavoriteScreen(navController) }
                 composable("loginScreen") { LoginScreen(navController) }
                 composable("registerScreen") { RegisterScreen(navController) }
+                composable("userprofileScreen") { UserProfileScreen(navController) }
+                composable("managerScreen") { ManagerScreen(navController) }
+                composable("managerScreen") { ManagerScreen(navController) }
 
 
             }
