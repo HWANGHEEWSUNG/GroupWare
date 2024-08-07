@@ -76,6 +76,7 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("registerScreen") { RegisterScreen(navController) }
                 composable("userprofileScreen") { UserProfileScreen(navController) }
                 composable("managerScreen") { ManagerScreen(navController) }
+                composable("managerScreen") { ManagerScreen(navController) }
 
 
             }
