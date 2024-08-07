@@ -45,6 +45,7 @@ fun MainScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(innerPadding)
                     .padding(16.dp)
+                    .background(Color.White)
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {

@@ -34,6 +34,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.groupware.entryScreen.EntryScreen
 import com.example.groupware.favoriteScreen.FavoriteScreen
 import com.example.groupware.gymScreen.GymScreen
+import com.example.groupware.loginScreen.LoginScreen
+import com.example.groupware.loginScreen.RegisterScreen
 import com.example.groupware.mainScreen.MainScreen
 import com.example.groupware.profileScreen.ProfileScreen
 import com.example.groupware.ui.theme.GroupWareTheme
@@ -68,6 +70,9 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("profileScreen") { ProfileScreen(navController) }
                 composable("gymScreen") { GymScreen(navController) }
                 composable("favoriteScreen") { FavoriteScreen(navController) }
+                composable("loginScreen") { LoginScreen(navController) }
+                composable("registerScreen") { RegisterScreen(navController) }
+
 
             }
         }
@@ -131,9 +136,9 @@ fun BottomNavigationBar(navController: NavHostController) {
                 alwaysShowLabel = false, // 라벨을 항상 표시하지 않도록 설정
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = Color(0xFF5927EB), // 선택된 아이콘 색상
-                    unselectedIconColor = Color.Gray, // 선택되지 않은 아이콘 색상
+                    unselectedIconColor = Color.White, // 선택되지 않은 아이콘 색상
                     selectedTextColor = Color(0xFF5927EB), // 선택된 텍스트 색상
-                    unselectedTextColor = Color.Gray // 선택되지 않은 텍스트 색상
+                    unselectedTextColor = Color.White // 선택되지 않은 텍스트 색상
                 )
             )
         }
