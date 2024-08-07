@@ -1,4 +1,4 @@
-package com.example.groupware.shopScreen
+package com.example.groupware.favoriteScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 
 @Composable
-fun ShopScreen(navController: NavController) {
+fun FavoriteScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()

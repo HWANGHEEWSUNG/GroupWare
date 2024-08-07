@@ -10,10 +10,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Event
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -32,10 +32,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.groupware.entryScreen.EntryScreen
+import com.example.groupware.favoriteScreen.FavoriteScreen
 import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.mainScreen.MainScreen
 import com.example.groupware.profileScreen.ProfileScreen
-import com.example.groupware.shopScreen.ShopScreen
 import com.example.groupware.ui.theme.GroupWareTheme
 
 class MainActivity : ComponentActivity() {
@@ -67,7 +67,7 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("mainScreen") { MainScreen(navController) }
                 composable("profileScreen") { ProfileScreen(navController) }
                 composable("gymScreen") { GymScreen(navController) }
-                composable("shopScreen") { ShopScreen(navController) }
+                composable("favoriteScreen") { FavoriteScreen(navController) }
 
             }
         }
@@ -77,7 +77,7 @@ fun AppContent(modifier: Modifier = Modifier) {
         if (currentRoute in listOf(
                 "mainScreen",
                 "gymScreen",
-                "shopScreen",
+                "favoriteScreen",
                 "profileScreen",
             )
         ) {
@@ -91,7 +91,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         BottomNavItem("홈", "mainScreen"),
         BottomNavItem("운동시설", "gymScreen"),
-        BottomNavItem("찜", "shopScreen"),
+        BottomNavItem("찜", "favoriteScreen"),
         BottomNavItem("마이다짐", "profileScreen"),
     )
 
@@ -118,9 +118,9 @@ fun BottomNavigationBar(navController: NavHostController) {
                 icon = {
                     val icon = when (item.route) {
                         "mainScreen" -> Icons.Filled.Home
-                        "gymScreen" -> Icons.Filled.Event
-                        "shopScreen" -> Icons.Filled.ShowChart // GMobiledata 아이콘 대신 ShowChart 사용
-                        "profileScreen" -> Icons.Filled.Person
+                        "gymScreen" -> Icons.Filled.FitnessCenter
+                        "favoriteScreen" -> Icons.Filled.Favorite // GMobiledata 아이콘 대신 ShowChart 사용
+                        "profileScreen" -> Icons.Filled.AccountCircle
                         else -> null
                     }
                     if (icon != null) {
