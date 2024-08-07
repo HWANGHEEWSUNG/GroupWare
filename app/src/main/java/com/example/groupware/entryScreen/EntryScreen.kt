@@ -45,7 +45,7 @@ fun EntryScreen(navController: NavController) {
         ) {
             // 커스텀 로고 텍스트
             Text(
-                text = "다짐", // 표시할 텍스트
+                text = "Fit you", // 표시할 텍스트
                 color = textColor,
                 style = TextStyle(
                     fontSize = 80.sp, // 폰트 크기
