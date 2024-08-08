@@ -24,7 +24,7 @@ fun EntryScreen(navController: NavController) {
         // 2초 대기
         delay(2000)
         // MainScreen으로 이동
-        navController.navigate("LoginScreen") {
+        navController.navigate("TheVeryFirstScreen") {
             // EntryScreen을 백스택에서 제거하여 뒤로 가기 시 이전 화면으로 가지 않도록 설정
             popUpTo("EntryScreen") { inclusive = true }
         }
