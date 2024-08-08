@@ -2,6 +2,7 @@ package com.example.groupware.gymScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,9 +52,13 @@ fun GymCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable {
+                // Navigate to GymInfoScreen when the card is clicked
+//                navController.navigate(gyminfoScreen)
+            },
         elevation = CardDefaults.elevatedCardElevation(4.dp)
-    ) {
+    ){
         Column(
             modifier = Modifier
                 .background(Color.White)
