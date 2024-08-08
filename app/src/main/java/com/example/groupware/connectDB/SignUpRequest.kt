@@ -1,20 +1,26 @@
-package com.example.groupware.managerScreen
+package com.example.groupware.connectDB
 
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.Response
 
-class RegisterRequest(
-    userID: String,
+class SignUpRequest(
+    email: String,
     password: String,
     level: Int,
+    name: String,
+    phone: String,
+    birth: String,
     listener: Response.Listener<String>,
     errorListener: Response.ErrorListener
 ) : StringRequest(Method.POST, URL, listener, errorListener) {
 
     private val parameters: Map<String, String> = mapOf(
-        "userID" to userID,
+        "userID" to email,
         "password" to password,
-        "level" to level.toString()
+        "level" to level.toString(),
+        "name" to name,
+        "phone" to phone,
+        "birth" to birth
     )
 
     override fun getParams(): Map<String, String> {

@@ -1,4 +1,4 @@
-package com.example.groupware.managerScreen
+package com.example.groupware.connectDB
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -46,7 +46,7 @@ fun DbConnect() {
                 // Handle error here
                 println("Error: ${error.message}")
             }
-            val registerRequest = RegisterRequest("userID", "password", 1, responseListener, errorListener)
+            val registerRequest = SignUpRequest("userID", "password", 1, "","","",responseListener, errorListener)
             requestQueue.add(registerRequest)
         }) {
             Text("Register")
