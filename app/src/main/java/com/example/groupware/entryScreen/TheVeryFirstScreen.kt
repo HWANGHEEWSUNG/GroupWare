@@ -47,7 +47,7 @@ fun TheVeryFirstScreen(navController: NavController) {
             Text(text = "일반 사용자", color = Color.White, fontSize = 16.sp)
         }
         Button(
-            onClick = { /* 관리자 클릭 처리 */ },
+            onClick = {navController.navigate("manreScreen")},
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
             modifier = Modifier

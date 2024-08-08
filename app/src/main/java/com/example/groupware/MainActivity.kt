@@ -37,6 +37,7 @@ import com.example.groupware.favoriteScreen.FavoriteScreen
 import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.gymScreen.GyminfoScreen
 import com.example.groupware.loginScreen.LoginScreen
+import com.example.groupware.loginScreen.ManreScreen
 import com.example.groupware.loginScreen.RegisterScreen
 import com.example.groupware.mainScreen.MainScreen
 import com.example.groupware.managerScreen.ManagerScreen
@@ -80,6 +81,7 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("userprofileScreen") { UserProfileScreen(navController) }
                 composable("managerScreen") { ManagerScreen(navController) }
                 composable("entryScreen") { TheVeryFirstScreen(navController) }
+                composable("ManreScreen") { ManreScreen(navController) }
 
 
             }
