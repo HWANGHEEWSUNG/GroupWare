@@ -32,6 +32,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.groupware.entryScreen.EntryScreen
+import com.example.groupware.entryScreen.TheVeryFirstScreen
 import com.example.groupware.favoriteScreen.FavoriteScreen
 import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.loginScreen.LoginScreen
@@ -76,7 +77,7 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("registerScreen") { RegisterScreen(navController) }
                 composable("userprofileScreen") { UserProfileScreen(navController) }
                 composable("managerScreen") { ManagerScreen(navController) }
-                composable("managerScreen") { ManagerScreen(navController) }
+                composable("entryScreen") { TheVeryFirstScreen(navController) }
 
 
             }

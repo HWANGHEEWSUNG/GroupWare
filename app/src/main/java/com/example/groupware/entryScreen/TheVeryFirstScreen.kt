@@ -1,8 +1,5 @@
-package com.example.groupware.profileScreen
+package com.example.groupware.entryScreen
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,23 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.groupware.R // R 파일을 명시적으로 가져옴
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MainScreen()
-        }
-    }
-}
-
 @Composable
-fun MainScreen() {
+fun TheVeryFirstScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +36,7 @@ fun MainScreen() {
         Spacer(modifier = Modifier.height(60.dp))
 
         Button(
-            onClick = { /* 일반 사용자 클릭 처리 */ },
+            onClick = {navController.navigate("loginScreen")},
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
             modifier = Modifier
@@ -74,8 +61,3 @@ fun MainScreen() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview() {
-    MainScreen()
-}
