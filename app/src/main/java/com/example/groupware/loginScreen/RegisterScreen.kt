@@ -21,10 +21,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
+import com.example.groupware.connectDB.SignUpRequest
 
 @Composable
 fun RegisterScreen(navController: NavController) {
@@ -157,8 +162,33 @@ fun RegisterScreen(navController: NavController) {
             Text(text = "이용약관 및 개인정보취급방침에 동의합니다.", color = Color.Gray)
         }
 
+        val requestQueue: RequestQueue = Volley.newRequestQueue(LocalContext.current) //필수~~
+
         Button(
-            onClick = { /* Handle registration logic */ },
+            onClick = {
+                val responseListener = Response.Listener<String> { response ->
+                    // Handle response here
+                    println("Response: $response")
+                }
+                val errorListener = Response.ErrorListener { error ->
+                    // Handle error here
+                    println("Error: ${error.message}")
+                }
+
+
+                val registerRequest = SignUpRequest(
+                    email,
+                    password,
+                    1,
+                    name,
+                    phone,
+                    birthYear + birthMonth + birthDay,
+                    responseListener,
+                    errorListener
+                )
+                requestQueue.add(registerRequest)
+            },
+
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
