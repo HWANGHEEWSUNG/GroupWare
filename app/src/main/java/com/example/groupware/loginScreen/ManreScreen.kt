@@ -134,7 +134,9 @@ fun ManreScreen(navController: NavController) {
 
             // Next Button
             Button(
-                onClick = { /* Handle registration */ },
+                onClick = {
+
+                },
                 enabled = termsAccepted,
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier.fillMaxWidth()

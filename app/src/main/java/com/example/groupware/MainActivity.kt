@@ -45,6 +45,8 @@ import com.example.groupware.profileScreen.ProfileScreen
 import com.example.groupware.profileScreen.UserProfileScreen
 import com.example.groupware.ui.theme.GroupWareTheme
 
+
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +76,7 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("mainScreen") { MainScreen(navController) }
                 composable("profileScreen") { ProfileScreen(navController) }
                 composable("gymScreen") { GymScreen(navController) }
-                composable("gymScreen") { GyminfoScreen(navController) }
+                composable("gyminfoScreen") { GyminfoScreen(navController) }
                 composable("favoriteScreen") { FavoriteScreen(navController) }
                 composable("loginScreen") { LoginScreen(navController) }
                 composable("registerScreen") { RegisterScreen(navController) }

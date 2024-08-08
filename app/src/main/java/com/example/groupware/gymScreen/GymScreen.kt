@@ -1,8 +1,8 @@
 package com.example.groupware.gymScreen
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +26,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.groupware.R
+import java.net.URL
+
+data class Centerinfo(
+    val userID: String,
+    val name: String,
+    val address: String,
+    val phone: String,
+    val point: Int,
+    val registration: String,
+    val type: String,
+    val picture1: URL,
+    val picture2: URL,
+    val picture3: URL,
+    val picture4: URL,
+    val picture5: URL,
+)
 
 @Composable
 fun GymScreen(navController: NavController) {
@@ -52,13 +68,9 @@ fun GymCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .clickable {
-                // Navigate to GymInfoScreen when the card is clicked
-//                navController.navigate(gyminfoScreen)
-            },
+            .padding(8.dp),
         elevation = CardDefaults.elevatedCardElevation(4.dp)
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .background(Color.White)

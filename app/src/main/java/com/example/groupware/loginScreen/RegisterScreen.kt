@@ -31,6 +31,17 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.groupware.connectDB.SignUpRequest
 
+
+class UserInfo(
+    val email: String,
+    val password: String,
+    val level: Int, //
+    val name: String,
+    val phone: String,
+    val birthDate: String // birthYear + birthMonth + birthDay 결합된 값
+)
+
+
 @Composable
 fun RegisterScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
@@ -42,6 +53,7 @@ fun RegisterScreen(navController: NavController) {
     var birthMonth by remember { mutableStateOf("") }
     var birthDay by remember { mutableStateOf("") }
     var termsAccepted by remember { mutableStateOf(false) }
+
 
     Column(
         modifier = Modifier
@@ -175,14 +187,9 @@ fun RegisterScreen(navController: NavController) {
                     println("Error: ${error.message}")
                 }
 
-
+                val userInfo = UserInfo(email, password, 1, name, phone, birthYear + birthMonth + birthDay)
                 val registerRequest = SignUpRequest(
-                    email,
-                    password,
-                    1,
-                    name,
-                    phone,
-                    birthYear + birthMonth + birthDay,
+                    userInfo,
                     responseListener,
                     errorListener
                 )
