@@ -36,10 +36,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.groupware.connectDB.sendImgServer
+
+data class CenterInfo(
+    var userID: String = "",
+    var name: String = "",
+    var address: String = "",
+    var phone: String = "",
+    var point: Int = 0,
+    var registration: String = "",
+    var type: String = "",
+)
 
 @Composable
 fun ManreScreen(navController: NavController) {
@@ -48,12 +60,27 @@ fun ManreScreen(navController: NavController) {
     var confirmPassword by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
+    var address by remember { mutableStateOf("") }
+    var registration by remember { mutableStateOf("") }
+    var type by remember { mutableStateOf("") }
     var fileUploaded by remember { mutableStateOf(false) }
     var termsAccepted by remember { mutableStateOf(false) }
-
+    val centerInfo = remember { mutableStateOf(CenterInfo()) }
+    val context = LocalContext.current
+    val filePaths = mutableListOf("", "", "", "", "")
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
-            //클릭한 uri가 List로 넘어옴
+            // 클릭한 uri가 List로 넘어옴
+            uris.forEachIndexed { index, uri ->
+                filePaths.add(uri.toString())
+                when(index){
+                    0 -> filePaths[0] = uri.toString()
+                    1 -> filePaths[1] = uri.toString()
+                    2 -> filePaths[2] = uri.toString()
+                    3 -> filePaths[3] = uri.toString()
+                    4 -> filePaths[4] = uri.toString()
+                }
+            }
         }
     // Use LazyColumn for scrolling
     LazyColumn(
@@ -76,27 +103,61 @@ fun ManreScreen(navController: NavController) {
                 fontSize = 14.sp
             )
             Spacer(modifier = Modifier.height(24.dp))
-            InputField(value = email, onValueChange = { email = it }, label = "아이디(이메일)", icon = Icons.Default.Email, keyboardType = KeyboardType.Email)
+            InputField(
+                value = email,
+                onValueChange = { email = it },
+                label = "아이디(이메일)",
+                icon = Icons.Default.Email,
+                keyboardType = KeyboardType.Email
+            )
             Spacer(modifier = Modifier.height(8.dp))
-            InputField(value = password, onValueChange = { password = it }, label = "비밀번호", icon = Icons.Default.Lock, keyboardType = KeyboardType.Password)
+            InputField(
+                value = password,
+                onValueChange = { password = it },
+                label = "비밀번호",
+                icon = Icons.Default.Lock,
+                keyboardType = KeyboardType.Password
+            )
             Spacer(modifier = Modifier.height(8.dp))
-            InputField(value = confirmPassword, onValueChange = { confirmPassword = it }, label = "비밀번호 확인", icon = Icons.Default.Lock, keyboardType = KeyboardType.Password)
+            InputField(
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it },
+                label = "비밀번호 확인",
+                icon = Icons.Default.Lock,
+                keyboardType = KeyboardType.Password
+            )
             Spacer(modifier = Modifier.height(8.dp))
             InputField(value = name, onValueChange = { name = it }, label = "이름")
             Spacer(modifier = Modifier.height(8.dp))
-            InputField(value = phoneNumber, onValueChange = { phoneNumber = it }, label = "연락처", keyboardType = KeyboardType.Phone)
+            InputField(
+                value = phoneNumber,
+                onValueChange = { phoneNumber = it },
+                label = "연락처",
+                keyboardType = KeyboardType.Phone
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            InputField(value = address, onValueChange = { address = it }, label = "주소")
+            Spacer(modifier = Modifier.height(16.dp))
+            InputField(
+                value = registration,
+                onValueChange = { registration = it },
+                label = "사업자 등록번호"
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            InputField(value = type, onValueChange = { type = it }, label = "센터 유형")
             Spacer(modifier = Modifier.height(16.dp))
         }
-
 
         item {
             // Image Selection Button
             Button(
-                onClick = { launcher.launch(
-                    PickVisualMediaRequest(
-                        mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
+                onClick = {
+                    launcher.launch(
+                        PickVisualMediaRequest(
+                            mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
+                        )
                     )
-                )},
+                },
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -112,7 +173,11 @@ fun ManreScreen(navController: NavController) {
                     Icon(imageVector = Icons.Default.FileUpload, contentDescription = "Upload File")
                 }
                 if (fileUploaded) {
-                    Icon(imageVector = Icons.Default.Check, contentDescription = "File Uploaded", tint = Color.Green)
+                    Icon(
+                        imageVector = Icons.Default.Check,
+                        contentDescription = "File Uploaded",
+                        tint = Color.Green
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -135,7 +200,16 @@ fun ManreScreen(navController: NavController) {
             // Next Button
             Button(
                 onClick = {
-
+                    centerInfo.value = centerInfo.value.copy(
+                        userID = email,
+                        name = name,
+                        address = address,
+                        phone = phoneNumber,
+                        registration = registration,
+                        type = type
+                    )
+                    // Handle navigation or any further action
+                    sendImgServer(filePaths, centerInfo, context)
                 },
                 enabled = termsAccepted,
                 shape = RoundedCornerShape(8.dp),

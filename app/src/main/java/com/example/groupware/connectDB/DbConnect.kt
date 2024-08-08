@@ -45,7 +45,7 @@ fun DbConnect() {
         val launcher =
             rememberLauncherForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
                 //클릭한 uri가 List로 넘어옴
-                sendImgServer(uris, context)
+//                sendImgServer(uris, centerInfo(), context)
 //                val registerRequest = CenterRegistRequest(
 //                    "ttttest",
 //                    "test",
@@ -89,8 +89,8 @@ fun DbConnect() {
         }
 
         Button(onClick = {
-            val registerRequest = SignUpRequest("userID", "password", 1, "","","",responseListener, errorListener)
-            requestQueue.add(registerRequest)
+//            val registerRequest = SignUpRequest("userID", "password", 1, "","","",responseListener, errorListener)
+//            requestQueue.add(registerRequest)
         }) {
             Text("Register")
         }

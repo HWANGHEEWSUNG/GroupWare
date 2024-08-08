@@ -1,16 +1,16 @@
 package com.example.groupware.connectDB
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.MutableState
+import androidx.core.net.toUri
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
+import com.example.groupware.loginScreen.CenterInfo
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
-import okhttp3.internal.wait
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -48,9 +48,9 @@ object RetrofitClient {
     }
 }
 
-fun uriToMultipartBodyPart(context: Context, uri: Uri, partName: String): MultipartBody.Part? {
-    val file = File(context.cacheDir, uri.lastPathSegment ?: return null)
-    context.contentResolver.openInputStream(uri)?.use { inputStream ->
+fun uriToMultipartBodyPart(context: Context, uri: String, partName: String): MultipartBody.Part? {
+    val file = File(context.cacheDir, uri.toUri().lastPathSegment ?: return null)
+    context.contentResolver.openInputStream(uri.toUri())?.use { inputStream ->
         file.outputStream().use { outputStream ->
             inputStream.copyTo(outputStream)
         }
@@ -60,7 +60,11 @@ fun uriToMultipartBodyPart(context: Context, uri: Uri, partName: String): Multip
     return MultipartBody.Part.createFormData(partName, file.name, requestFile)
 }
 
-fun sendImgServer(imageUris: List<Uri>, context: Context) {
+fun sendImgServer(
+    imageUris: MutableList<String>,
+    centerInfo: MutableState<CenterInfo>,
+    context: Context
+) {
     val parts = imageUris.mapIndexed { index, uri ->
         uriToMultipartBodyPart(context, uri, "picture${index + 1}")
     }
@@ -107,7 +111,7 @@ fun sendImgServer(imageUris: List<Uri>, context: Context) {
                     }
 
                     val registerRequest = CenterRegistRequest(
-                        "ttttest123123",
+                        "ttttest1231231123213123",
                         "test",
                         2,
                         "ss",

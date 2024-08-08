@@ -26,22 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.groupware.R
-import java.net.URL
 
-data class Centerinfo(
-    val userID: String,
-    val name: String,
-    val address: String,
-    val phone: String,
-    val point: Int,
-    val registration: String,
-    val type: String,
-    val picture1: URL,
-    val picture2: URL,
-    val picture3: URL,
-    val picture4: URL,
-    val picture5: URL,
-)
 
 @Composable
 fun GymScreen(navController: NavController) {
