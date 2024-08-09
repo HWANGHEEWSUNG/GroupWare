@@ -48,7 +48,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.groupware.R
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GymScreen(navController: NavController) {
     var showFilterDialog by remember { mutableStateOf(false) }

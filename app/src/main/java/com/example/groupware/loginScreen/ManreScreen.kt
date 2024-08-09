@@ -211,6 +211,7 @@ fun ManreScreen(navController: NavController) {
                     )
                     // Handle navigation or any further action
                     sendImgServer(filePaths, centerInfo, context)
+                    navController.navigate("ManagerLoginScreen")
                 },
                 enabled = termsAccepted,
                 shape = RoundedCornerShape(8.dp),

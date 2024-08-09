@@ -1,4 +1,4 @@
-package com.example.groupware.profileScreen
+package com.example.groupware.gymScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
