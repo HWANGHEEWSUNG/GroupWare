@@ -1,5 +1,6 @@
 package com.example.groupware
 
+//import com.example.groupware.gymScreen.GyminfoScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -35,16 +36,17 @@ import com.example.groupware.entryScreen.EntryScreen
 import com.example.groupware.entryScreen.TheVeryFirstScreen
 import com.example.groupware.favoriteScreen.FavoriteScreen
 import com.example.groupware.gymScreen.GymScreen
-import com.example.groupware.gymScreen.GyminfoScreen
 import com.example.groupware.loginScreen.LoginScreen
 import com.example.groupware.loginScreen.ManreScreen
 import com.example.groupware.loginScreen.RegisterScreen
 import com.example.groupware.mainScreen.MainScreen
 import com.example.groupware.managerScreen.ManagerScreen
+import com.example.groupware.gymScreen.GymInfoScreen
+import com.example.groupware.loginScreen.ManagerLoginScreen
+import com.example.groupware.profileScreen.GymProfileScreen
 import com.example.groupware.profileScreen.ProfileScreen
 import com.example.groupware.profileScreen.UserProfileScreen
 import com.example.groupware.ui.theme.GroupWareTheme
-
 
 
 class MainActivity : ComponentActivity() {
@@ -76,14 +78,16 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("mainScreen") { MainScreen(navController) }
                 composable("profileScreen") { ProfileScreen(navController) }
                 composable("gymScreen") { GymScreen(navController) }
-                composable("gyminfoScreen") { GyminfoScreen(navController) }
+                composable("gyminfoScreen") { GymInfoScreen(navController) }
                 composable("favoriteScreen") { FavoriteScreen(navController) }
                 composable("loginScreen") { LoginScreen(navController) }
+                composable("managerloginScreen") { ManagerLoginScreen(navController) }
                 composable("registerScreen") { RegisterScreen(navController) }
                 composable("userprofileScreen") { UserProfileScreen(navController) }
                 composable("managerScreen") { ManagerScreen(navController) }
                 composable("entryScreen") { TheVeryFirstScreen(navController) }
                 composable("ManreScreen") { ManreScreen(navController) }
+                composable("gymprofileScreen") { GymProfileScreen(navController) }
 
 
             }

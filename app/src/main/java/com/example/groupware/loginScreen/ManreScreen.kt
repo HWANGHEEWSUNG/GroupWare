@@ -46,6 +46,7 @@ import com.example.groupware.connectDB.sendImgServer
 data class CenterInfo(
     var userID: String = "",
     var name: String = "",
+    var password: String = "",
     var address: String = "",
     var phone: String = "",
     var point: Int = 0,
@@ -210,6 +211,7 @@ fun ManreScreen(navController: NavController) {
                     )
                     // Handle navigation or any further action
                     sendImgServer(filePaths, centerInfo, context)
+                    navController.navigate("ManagerLoginScreen")
                 },
                 enabled = termsAccepted,
                 shape = RoundedCornerShape(8.dp),
