@@ -1,29 +1,51 @@
 package com.example.groupware.loginScreen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import java.time.LocalDate
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
+import com.example.groupware.connectDB.UserLoginRequest
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var rememberId by remember { mutableStateOf(false) }
     var stayLoggedIn by remember { mutableStateOf(false) }
 
+    val requestQueue: RequestQueue = Volley.newRequestQueue(
+        LocalContext.current)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -40,8 +62,8 @@ fun LoginScreen(navController: NavController) {
         )
 
         BasicTextField(
-            value = username,
-            onValueChange = { username = it },
+            value = email,
+            onValueChange = { email = it },
             decorationBox = { innerTextField ->
                 Box(
                     modifier = Modifier
@@ -49,7 +71,7 @@ fun LoginScreen(navController: NavController) {
                         .background(Color(0xFFF0F0F0))
                         .padding(16.dp)
                 ) {
-                    if (username.isEmpty()) {
+                    if (email.isEmpty()) {
                         Text(text = "아이디", color = Color.Gray)
                     }
                     innerTextField()
@@ -97,7 +119,33 @@ fun LoginScreen(navController: NavController) {
         }
 
         Button(
-            onClick = { navController.navigate("gymScreen")},
+            onClick = {
+                //navController.navigate("gymScreen")
+
+                val userInfo = UserInfo(email, password, 1, "", "", "")
+                val responseListener = Response.Listener<String> { response ->
+                    // Handle response here
+                    println("Response: $response")
+                    val gson = Gson()
+                    val type = object : TypeToken<Map<String, Any>>() {}.type
+                    val jsonMap: Map<String, String> = gson.fromJson(response, type)
+                    userInfo.name = jsonMap["name"].toString()
+                    userInfo.phone = jsonMap["phone"].toString()
+                    userInfo.birthDate = jsonMap["birth"].toString()
+                    println(userInfo.name)
+                }
+                val errorListener = Response.ErrorListener { error ->
+                    // Handle error here
+                    println("Error: ${error.message}")
+                }
+
+                val registerRequest = UserLoginRequest(
+                    userInfo,
+                    responseListener,
+                    errorListener
+                )
+                requestQueue.add(registerRequest)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)

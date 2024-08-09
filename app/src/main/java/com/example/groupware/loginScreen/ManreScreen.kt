@@ -209,7 +209,6 @@ fun ManreScreen(navController: NavController) {
                         registration = registration,
                         type = type
                     )
-                    // Handle navigation or any further action
                     sendImgServer(filePaths, centerInfo, context)
                     navController.navigate("ManagerLoginScreen")
                 },

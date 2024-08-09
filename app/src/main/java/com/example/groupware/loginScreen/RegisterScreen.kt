@@ -36,9 +36,9 @@ class UserInfo(
     val email: String,
     val password: String,
     val level: Int, //
-    val name: String,
-    val phone: String,
-    val birthDate: String // birthYear + birthMonth + birthDay 결합된 값
+    var name: String,
+    var phone: String,
+    var birthDate: String // birthYear + birthMonth + birthDay 결합된 값
 )
 
 

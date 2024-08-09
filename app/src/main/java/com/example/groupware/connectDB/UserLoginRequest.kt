@@ -20,6 +20,6 @@ class UserLoginRequest(
     }
 
     companion object {
-        private const val URL = "http://192.168.45.237/query/signup.php"
+        private const val URL = "http://192.168.45.50/query/login.php"
     }
 }

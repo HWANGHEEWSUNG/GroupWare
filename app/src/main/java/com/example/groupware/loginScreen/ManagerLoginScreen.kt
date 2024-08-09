@@ -127,7 +127,7 @@ fun ManagerLoginScreen(navController: NavController) {
             Text(text = "비밀번호 찾기", color = Color.Gray)
             Spacer(modifier = Modifier.width(16.dp))
             Button(
-                onClick = {navController.navigate("registerScreen")},
+                onClick = {navController.navigate("ManregisterScreen")},
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
