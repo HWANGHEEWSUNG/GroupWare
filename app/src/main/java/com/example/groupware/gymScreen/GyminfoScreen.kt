@@ -1,6 +1,5 @@
 package com.example.groupware.gymScreen
 
-import androidx.annotation.Size
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -114,7 +114,6 @@ fun GymInfoScreen(navController: NavController) {
                 modifier = Modifier.padding(start = 95.dp)
             )
         }
-//여기 밑으로 수정중
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -133,10 +132,9 @@ fun GymInfoScreen(navController: NavController) {
                 Text(
                     text = "  일일권",
                     color = Color.Black,
-//                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )
-//여기 위로 수정중
 
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -195,6 +193,17 @@ fun GymInfoScreen(navController: NavController) {
             fontSize = 15.sp,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
+
+        Spacer(modifier = Modifier.height(18.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.pic_map),
+            contentDescription = "지도",
+            modifier = Modifier
+                .height(250.dp)
+                .width(900.dp)
+            )
+
         Spacer(modifier = Modifier.height(200.dp))
         Button(
             onClick = { /* Handle membership selection */ },
