@@ -1,5 +1,6 @@
 package com.example.groupware.gymScreen
 
+import androidx.annotation.Size
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -29,9 +30,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.groupware.R
@@ -75,26 +76,27 @@ fun GymInfoScreen(navController: NavController) {
                 }
             }
         }
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "강남 헬스보이짐X필라걸",
+            text = "강남 Fityou 피트니스센터X필라테스",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "서울특별시 강남구 역삼동 826-26, B1 헬스보이짐 X 필라걸",
+            text = "서울특별시 강남구 역삼동 826-26, B1 Fityou 피트니스센터 X 필라테스",
             fontSize = 16.sp,
             color = Color.Gray,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(horizontal = 16.dp)
         ) {
             Text(
-                text = "★ 4.9",
+                text = "★★★★★ 4.9",
                 color = Color(0xFFFFD700),
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
@@ -104,13 +106,37 @@ fun GymInfoScreen(navController: NavController) {
                 color = Color.Gray,
                 modifier = Modifier.padding(start = 8.dp)
             )
-//            Text(
-//                text = "150 point",
-//                color = Color.Black,
-//                fontWeight = FontWeight.Bold,
-//                fontSize = 19.dp,
-//                modifier = Modifier.padding(start = 180.dp)
-//            )
+            Text(
+                text = "150 Point",
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.padding(start = 95.dp)
+            )
+        }
+//여기 밑으로 수정중
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) {
+
+                Image(
+                    painter = painterResource(id = R.drawable.ticket),
+                    contentDescription =  "일일권 왼쪽 Icon",
+                    modifier = Modifier
+                        .size(20.dp)
+                )
+
+                Text(
+                    text = "  일일권",
+                    color = Color.Black,
+//                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+//여기 위로 수정중
 
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -120,6 +146,7 @@ fun GymInfoScreen(navController: NavController) {
                 .padding(horizontal = 16.dp),
             colors = CardDefaults.cardColors(Color(0xFFFFF0E0)),
             shape = RoundedCornerShape(8.dp)
+
         ) {
             Row(
                 modifier = Modifier
@@ -127,8 +154,9 @@ fun GymInfoScreen(navController: NavController) {
                     .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "선착순 10,000원 쿠폰",
+                    text = "선착순 100 Point 쿠폰",
                     color = Color.Red,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
@@ -143,10 +171,9 @@ fun GymInfoScreen(navController: NavController) {
                     onClick = { /* Handle coupon download */ },
                     modifier = Modifier.size(24.dp)
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.logo),
-                        contentDescription = "Download",
-                        tint = Color.Red
+                    Image(
+                        painter = painterResource(id = R.drawable.siren),
+                        contentDescription = "4개 남음 오른쪽 아이콘"
                     )
                 }
             }
@@ -168,7 +195,7 @@ fun GymInfoScreen(navController: NavController) {
             fontSize = 15.sp,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(200.dp))
         Button(
             onClick = { /* Handle membership selection */ },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
@@ -178,7 +205,7 @@ fun GymInfoScreen(navController: NavController) {
                 .padding(horizontal = 16.dp)
         ) {
             Text(
-                text = "회원권 선택",
+                text = "150 Point 결제하기",
                 color = Color.White,
                 fontSize = 18.sp
             )
@@ -186,10 +213,9 @@ fun GymInfoScreen(navController: NavController) {
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewGymInfoScreen() {
-    GymInfoScreen(navController = rememberNavController())
-}
+    @Preview(showBackground = true)
+    @Composable
+    fun PreviewGymInfoScreen() {
+        GymInfoScreen(navController = rememberNavController())
+    }
 
