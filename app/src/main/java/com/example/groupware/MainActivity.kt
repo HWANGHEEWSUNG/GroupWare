@@ -1,6 +1,6 @@
 package com.example.groupware
 
-//import com.example.groupware.gymScreen.GyminfoScreen
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -35,6 +35,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.groupware.entryScreen.EntryScreen
 import com.example.groupware.entryScreen.TheVeryFirstScreen
 import com.example.groupware.favoriteScreen.FavoriteScreen
+import com.example.groupware.graphScreen.GraphScreen
 import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.loginScreen.LoginScreen
 import com.example.groupware.loginScreen.ManreScreen
@@ -88,6 +89,8 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("entryScreen") { TheVeryFirstScreen(navController) }
                 composable("ManreScreen") { ManreScreen(navController) }
                 composable("gymprofileScreen") { GymProfileScreen(navController) }
+               composable("graphScreen") { GraphScreen(navController) }
+
 
 
             }
@@ -100,6 +103,10 @@ fun AppContent(modifier: Modifier = Modifier) {
                 "gymScreen",
                 "favoriteScreen",
                 "profileScreen",
+                "graphScreen",
+                "profileScreen",
+                "userprofileScreen",
+                "managerScreen"
             )
         ) {
             BottomNavigationBar(navController)

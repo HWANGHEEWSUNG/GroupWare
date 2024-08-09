@@ -171,7 +171,7 @@ fun GymCard(navController: NavController) {
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
-                navController.navigate("gymInfoScreen")
+                navController.navigate("gyminfoScreen")
             },
         elevation = CardDefaults.elevatedCardElevation(4.dp)
     ) {

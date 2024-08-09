@@ -1,8 +1,5 @@
 package com.example.groupware.graphScreen
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,22 +27,19 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.groupware.R
 
-class GraphScreen : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MyGraph()
-        }
-    }
-}
+
+//@Composable
+//fun GraphScreen(navController: NavController) {
+//
+//}
 
 @Composable
-fun MyGraph() {
+fun GraphScreen(navController: NavController) {
     // 예시 데이터
     val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
     val visitCounts = listOf(50, 70, 30, 90, 100, 120, 80)
@@ -220,8 +214,3 @@ fun ColumnChart(days: List<String>, values: List<Int>, label: String, barColor: 
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewGraphScreen() {
-    MyGraph()
-}

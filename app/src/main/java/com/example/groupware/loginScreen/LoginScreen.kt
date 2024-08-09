@@ -120,7 +120,7 @@ fun LoginScreen(navController: NavController) {
 
         Button(
             onClick = {
-                //navController.navigate("gymScreen")
+                navController.navigate("gymScreen")
 
                 val userInfo = UserInfo(email, password, 1, "", "", "")
                 val responseListener = Response.Listener<String> { response ->
