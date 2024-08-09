@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,9 +26,10 @@ fun TheVeryFirstScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.White)
+            .padding(top = 220.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top
     ) {
         Image(
             painter = painterResource(id = R.drawable.logo),
@@ -36,7 +38,14 @@ fun TheVeryFirstScreen(navController: NavController) {
                 .size(150.dp)
                 .padding(bottom = 16.dp)
         )
-        Spacer(modifier = Modifier.height(90.dp))
+        Spacer(modifier = Modifier.height(60.dp))
+
+        Text(
+            text = "다양한 운동을 포인트로 손쉽게 예약할 수 있는 운동 플랫폼",
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(60.dp))
 
         // 일반 사용자 버튼
         Button(
