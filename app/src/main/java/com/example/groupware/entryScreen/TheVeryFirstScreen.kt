@@ -50,13 +50,13 @@ fun TheVeryFirstScreen(navController: NavController) {
         // 일반 사용자 버튼
         Button(
             onClick = { navController.navigate("loginScreen") },
-            shape = RoundedCornerShape(24.dp), // More rounded corners
+            shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
             modifier = Modifier
                 .width(220.dp)
                 .height(60.dp)
                 .padding(bottom = 16.dp)
-                .shadow(8.dp, shape = RoundedCornerShape(24.dp)) // Add shadow
+                .shadow(8.dp, shape = RoundedCornerShape(24.dp))
         ) {
             Text(text = "일반 사용자", color = Color.White, fontSize = 16.sp)
         }
@@ -66,22 +66,22 @@ fun TheVeryFirstScreen(navController: NavController) {
         // 관리자 버튼
         Button(
             onClick = { navController.navigate("manreScreen") },
-            shape = RoundedCornerShape(24.dp), // More rounded corners
+            shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
             modifier = Modifier
                 .width(220.dp)
                 .height(60.dp)
                 .padding(bottom = 16.dp)
-                .shadow(8.dp, shape = RoundedCornerShape(24.dp)) // Add shadow
+                .shadow(8.dp, shape = RoundedCornerShape(24.dp))
         ) {
             Text(text = "관리자", color = Color.White, fontSize = 16.sp)
         }
     }
 }
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewTheVeryFirstScreen() {
-    TheVeryFirstScreen(navController = rememberNavController())
-}
+//
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewTheVeryFirstScreen() {
+//    TheVeryFirstScreen(navController = rememberNavController())
+//}
