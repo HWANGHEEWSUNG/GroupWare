@@ -46,6 +46,7 @@ import com.example.groupware.connectDB.sendImgServer
 data class CenterInfo(
     var userID: String = "",
     var name: String = "",
+    var password: String = "",
     var address: String = "",
     var phone: String = "",
     var point: Int = 0,
