@@ -17,7 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.groupware.R
 
 @Composable
@@ -83,4 +85,11 @@ fun GymProfileScreen(navController: NavController) {
         }
     }
 }
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewGymProfileScreen() {
+//    GymProfileScreen(navController = rememberNavController())
+//}
+//
 

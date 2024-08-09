@@ -45,9 +45,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.groupware.R
 
@@ -275,5 +277,10 @@ fun ContractScreen() {
         Text(text = "계약서 내용이 여기에 표시됩니다.", fontSize = 18.sp)
     }
 }
-
-
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewProfileScreen() {
+//    ProfileScreen(navController = rememberNavController())
+//}
+//

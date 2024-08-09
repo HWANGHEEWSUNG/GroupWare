@@ -12,9 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.groupware.R // R 파일을 명시적으로 가져옴
 
 @Composable
@@ -61,3 +63,8 @@ fun TheVeryFirstScreen(navController: NavController) {
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun PreviewTheVeryFirstScreen() {
+    TheVeryFirstScreen(navController = rememberNavController())
+}
