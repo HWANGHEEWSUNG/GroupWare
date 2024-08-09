@@ -40,7 +40,7 @@ fun GymInfoScreen(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())  // 필요하면 밑으로 스크롤 할 수 있는 기능
+                .verticalScroll(rememberScrollState())  // 필요하면 아래 위로 스크롤 되도록
         ) {
             Box(
                 modifier = Modifier
@@ -203,7 +203,7 @@ fun GymInfoScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(200.dp))
         }
 
-        // "150 point 결제하기" 버튼 항상 같은 자리에 떠있도록
+        // "150 point 결제하기" 버튼 밑으로 스크롤해도 항상 떠있도록
         Button(
             onClick = { /* Handle membership selection */ },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
