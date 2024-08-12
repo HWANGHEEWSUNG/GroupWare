@@ -1,4 +1,4 @@
-package com.example.groupware.loginScreen
+package com.example.groupware.managerScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -14,7 +14,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -38,15 +37,15 @@ import com.example.groupware.entryScreen.TheVeryFirstScreen
 import com.example.groupware.graphScreen.GraphScreen
 import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.loginScreen.LoginScreen
-import com.example.groupware.loginScreen.ManreScreen
+import com.example.groupware.managerScreen.ManreScreen
 import com.example.groupware.loginScreen.RegisterScreen
 import com.example.groupware.mainScreen.MainScreen
 import com.example.groupware.managerScreen.ManagerScreen
 import com.example.groupware.gymScreen.GymInfoScreen
-import com.example.groupware.loginScreen.ManagerLoginScreen
+import com.example.groupware.managerScreen.ManagerLoginScreen
 import com.example.groupware.managerScreen.MainManagerScreen
 import com.example.groupware.profileScreen.GymProfileScreen
-import com.example.groupware.profileScreen.ProfileScreen
+import com.example.groupware.managerScreen.ProfileScreen
 import com.example.groupware.profileScreen.UserProfileScreen
 import com.example.groupware.ui.theme.GroupWareTheme
 
@@ -86,11 +85,11 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("registerScreen") { RegisterScreen(navController) }
                 composable("userprofileScreen") { UserProfileScreen(navController) }
                 composable("managerScreen") { ManagerScreen(navController) }
-                composable("entryScreen") { TheVeryFirstScreen(navController) }
-                composable("ManreScreen") { ManreScreen(navController) }
+                composable("TheVeryFirstScreen") { TheVeryFirstScreen(navController) }
                 composable("gymprofileScreen") { GymProfileScreen(navController) }
                 composable("graphScreen") { GraphScreen(navController) }
                 composable("mainManagerScreen") { MainManagerScreen(navController) }
+                composable("manreScreen") { ManreScreen(navController) }
 
 
             }
@@ -102,11 +101,7 @@ fun AppContent(modifier: Modifier = Modifier) {
                 "mainScreen",
                 "gymScreen",
                 "favoriteScreen",
-                "profileScreen",
-                "graphScreen",
-                "profileScreen",
                 "userprofileScreen",
-                "managerScreen"
             )
         ) {
             BottomNavigationBar(navController)

@@ -6,7 +6,7 @@ import androidx.compose.runtime.MutableState
 import androidx.core.net.toUri
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
-import com.example.groupware.loginScreen.CenterInfo
+import com.example.groupware.managerScreen.CenterInfo
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

@@ -1,4 +1,4 @@
-package com.example.groupware.loginScreen
+package com.example.groupware.managerScreen
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest

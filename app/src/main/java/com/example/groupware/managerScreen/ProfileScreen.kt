@@ -1,4 +1,4 @@
-package com.example.groupware.profileScreen
+package com.example.groupware.managerScreen
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
