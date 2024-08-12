@@ -26,6 +26,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.AsyncImagePainter
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
@@ -33,12 +34,13 @@ import com.example.groupware.connectDB.SignUpRequest
 
 
 class UserInfo(
-    val email: String,
-    val password: String,
-    val level: Int, //
-    var name: String,
-    var phone: String,
-    var birthDate: String // birthYear + birthMonth + birthDay 결합된 값
+    var success: String = "",
+    val email: String = "",
+    val password: String = "",
+    val level: Int = 0, //
+    var name: String = "",
+    var phone: String = "",
+    var birthDate: String = "" // birthYear + birthMonth + birthDay 결합된 값
 )
 
 
@@ -187,7 +189,7 @@ fun RegisterScreen(navController: NavController) {
                     println("Error: ${error.message}")
                 }
 
-                val userInfo = UserInfo(email, password, 1, name, phone, birthYear + birthMonth + birthDay)
+                val userInfo = UserInfo("0", email, password, 1, name, phone, birthYear + birthMonth + birthDay)
                 val registerRequest = SignUpRequest(
                     userInfo,
                     responseListener,

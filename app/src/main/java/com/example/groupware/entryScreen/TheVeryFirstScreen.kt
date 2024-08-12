@@ -65,7 +65,7 @@ fun TheVeryFirstScreen(navController: NavController) {
 
         // 관리자 버튼
         Button(
-            onClick = { navController.navigate("manreScreen") },
+            onClick = { navController.navigate("managerloginScreen") },
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
             modifier = Modifier

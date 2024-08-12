@@ -49,6 +49,7 @@ import com.example.groupware.profileScreen.ProfileScreen
 import com.example.groupware.profileScreen.UserProfileScreen
 import com.example.groupware.ui.theme.GroupWareTheme
 
+const val serverURL = "http://192.168.45.105/"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

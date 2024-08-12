@@ -1,5 +1,6 @@
 package com.example.groupware.loginScreen
 
+import android.graphics.Bitmap
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -43,15 +44,21 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.groupware.connectDB.sendImgServer
 
-data class CenterInfo(
-    var userID: String = "",
-    var name: String = "",
+data class ManagerInfo(
+    var success: String = "",
+    var email: String = "",
     var password: String = "",
+    var name: String = "",
     var address: String = "",
     var phone: String = "",
-    var point: Int = 0,
+    var point: String = "0",
     var registration: String = "",
     var type: String = "",
+    var picture1: Bitmap? = null,
+    var picture2: Bitmap? = null,
+    var picture3: Bitmap? = null,
+    var picture4: Bitmap? = null,
+    var picture5: Bitmap? = null,
 )
 
 @Composable
@@ -66,7 +73,7 @@ fun ManreScreen(navController: NavController) {
     var type by remember { mutableStateOf("") }
     var fileUploaded by remember { mutableStateOf(false) }
     var termsAccepted by remember { mutableStateOf(false) }
-    val centerInfo = remember { mutableStateOf(CenterInfo()) }
+    var managerInfo = ManagerInfo()
     val context = LocalContext.current
     val filePaths = mutableListOf("", "", "", "", "")
     val launcher =
@@ -201,15 +208,15 @@ fun ManreScreen(navController: NavController) {
             // Next Button
             Button(
                 onClick = {
-                    centerInfo.value = centerInfo.value.copy(
-                        userID = email,
+                    managerInfo = managerInfo.copy(
+                        email = email,
                         name = name,
                         address = address,
                         phone = phoneNumber,
                         registration = registration,
                         type = type
                     )
-                    sendImgServer(filePaths, centerInfo, context)
+                    sendImgServer(filePaths, managerInfo, context)
                     navController.navigate("ManagerLoginScreen")
                 },
                 enabled = termsAccepted,

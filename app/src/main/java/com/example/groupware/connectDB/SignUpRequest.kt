@@ -3,6 +3,7 @@ package com.example.groupware.connectDB
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.Response
 import com.example.groupware.loginScreen.UserInfo
+import com.example.groupware.serverURL
 
 class SignUpRequest(
     userInfo: UserInfo,
@@ -24,6 +25,6 @@ class SignUpRequest(
     }
 
     companion object {
-        private const val URL = "http://192.168.45.50/query/signup.php"
+        private const val URL = serverURL + "query/signup.php"
     }
 }

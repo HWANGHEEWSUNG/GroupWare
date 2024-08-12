@@ -6,7 +6,8 @@ import androidx.compose.runtime.MutableState
 import androidx.core.net.toUri
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
-import com.example.groupware.loginScreen.CenterInfo
+import com.example.groupware.loginScreen.ManagerInfo
+import com.example.groupware.serverURL
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -25,7 +26,7 @@ import java.io.File
 
 interface ApiService {
     @Multipart
-    @POST("saveimg.php")
+    @POST("query/saveimg.php")
     fun uploadImages(
         @Part picture1: MultipartBody.Part?,
         @Part picture2: MultipartBody.Part?,
@@ -36,7 +37,7 @@ interface ApiService {
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.45.237/"
+    private const val BASE_URL = serverURL
 
     val instance: ApiService by lazy {
         val retrofit = Retrofit.Builder()
@@ -62,7 +63,7 @@ fun uriToMultipartBodyPart(context: Context, uri: String, partName: String): Mul
 
 fun sendImgServer(
     imageUris: MutableList<String>,
-    centerInfo: MutableState<CenterInfo>,
+    managerInfo: ManagerInfo,
     context: Context
 ) {
     val parts = imageUris.mapIndexed { index, uri ->
@@ -110,15 +111,8 @@ fun sendImgServer(
                         println("Error: ${error.message}")
                     }
 
-                    val registerRequest = CenterRegistRequest(
-                        "ttttest1231231123213123",
-                        "test",
-                        2,
-                        "ss",
-                        "sss",
-                        "ss",
-                        "Y",
-                        "1",
+                    val registerRequest = ManagerRegistRequest(
+                        managerInfo,
                         filePaths[0],
                         filePaths[1],
                         filePaths[2],
