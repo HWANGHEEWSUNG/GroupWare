@@ -1,8 +1,5 @@
-package com.example.groupware.managerScreen
+ package com.example.groupware.managerScreen
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,21 +18,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavController
 import com.example.groupware.R
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MainScreen()
-        }
-    }
-}
 
 @Composable
-fun MainScreen() {
+fun MainManagerScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -67,7 +56,7 @@ fun TopBar() {
                 modifier = Modifier.size(25.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = "Fityou피트니스 1호점", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Fityou피트니스 1호점", fontSize = 20.sp, fontWeight = FontWeight.Bold,color = Color.Black)
             Image(
                 painter = painterResource(id = R.drawable.baseline_keyboard_arrow_down_24),
                 contentDescription = "Arrow Down Icon",
@@ -92,7 +81,7 @@ fun AttendanceCard() {
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = "출석확인을 진행해 주세요.", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(text = "출석확인을 진행해 주세요.", fontSize = 16.sp, fontWeight = FontWeight.Bold,color = Color.Black)
             Spacer(modifier = Modifier.height(8.dp))
             Button(
                 onClick = { /* 출석 확인하기 클릭 처리 */ },
@@ -212,9 +201,4 @@ fun AttendanceItem(name: String, activity: String, time: String, profileImageId:
         }
     }
 }
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun MainScreenPreview() {
-//    MainScreen()
-//}
+

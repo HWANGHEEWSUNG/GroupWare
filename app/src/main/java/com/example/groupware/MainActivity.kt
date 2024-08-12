@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.Home
@@ -34,7 +35,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.groupware.entryScreen.EntryScreen
 import com.example.groupware.entryScreen.TheVeryFirstScreen
-import com.example.groupware.favoriteScreen.FavoriteScreen
 import com.example.groupware.graphScreen.GraphScreen
 import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.loginScreen.LoginScreen
@@ -44,6 +44,7 @@ import com.example.groupware.mainScreen.MainScreen
 import com.example.groupware.managerScreen.ManagerScreen
 import com.example.groupware.gymScreen.GymInfoScreen
 import com.example.groupware.loginScreen.ManagerLoginScreen
+import com.example.groupware.managerScreen.MainManagerScreen
 import com.example.groupware.profileScreen.GymProfileScreen
 import com.example.groupware.profileScreen.ProfileScreen
 import com.example.groupware.profileScreen.UserProfileScreen
@@ -80,7 +81,6 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("profileScreen") { ProfileScreen(navController) }
                 composable("gymScreen") { GymScreen(navController) }
                 composable("gyminfoScreen") { GymInfoScreen(navController) }
-                composable("favoriteScreen") { FavoriteScreen(navController) }
                 composable("loginScreen") { LoginScreen(navController) }
                 composable("managerloginScreen") { ManagerLoginScreen(navController) }
                 composable("registerScreen") { RegisterScreen(navController) }
@@ -89,8 +89,8 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("entryScreen") { TheVeryFirstScreen(navController) }
                 composable("ManreScreen") { ManreScreen(navController) }
                 composable("gymprofileScreen") { GymProfileScreen(navController) }
-               composable("graphScreen") { GraphScreen(navController) }
-
+                composable("graphScreen") { GraphScreen(navController) }
+                composable("mainManagerScreen") { MainManagerScreen(navController) }
 
 
             }
@@ -117,8 +117,8 @@ fun AppContent(modifier: Modifier = Modifier) {
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
-        BottomNavItem("홈", "mainScreen"),
-        BottomNavItem("운동시설", "gymScreen"),
+        BottomNavItem("홈", "gymScreen"),
+        BottomNavItem("달력", "managerScreen"),
         BottomNavItem("찜", "profileScreen"),
         BottomNavItem("마이다짐", "userprofileScreen"),
     )
@@ -145,8 +145,8 @@ fun BottomNavigationBar(navController: NavHostController) {
                 },
                 icon = {
                     val icon = when (item.route) {
-                        "mainScreen" -> Icons.Filled.Home
-                        "gymScreen" -> Icons.Filled.FitnessCenter
+                        "gymScreen" -> Icons.Filled.Home
+                        "managerScreen" -> Icons.Filled.CalendarMonth
                         "favoriteScreen" -> Icons.Filled.Favorite // GMobiledata 아이콘 대신 ShowChart 사용
                         "userprofileScreen" -> Icons.Filled.AccountCircle
                         else -> null

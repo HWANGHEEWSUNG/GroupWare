@@ -253,7 +253,7 @@ fun FilterPriceDialog(onDismiss: () -> Unit, onPriceSelected: (String) -> Unit) 
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        listOf("1개월", "3개월", "6개월", "12개월").forEach { period ->
+                        listOf("1개월", "3개월", "6개월").forEach { period ->
                             Row {
                                 RadioButton(
                                     selected = selectedPeriod == period,
