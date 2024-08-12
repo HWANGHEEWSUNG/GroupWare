@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -37,7 +39,6 @@ fun FilterDialog(onDismiss: () -> Unit) {
     var showPriceDialog by remember { mutableStateOf(false) }
     var showOtherDialog by remember { mutableStateOf(false) }
 
-    // State variables to hold selected values
     var selectedCategory by remember { mutableStateOf("선택한 운동종목 없음") }
     var selectedPrice by remember { mutableStateOf("선택한 가격 없음") }
     var selectedOther by remember { mutableStateOf("선택한 기타 옵션 없음") }
@@ -51,30 +52,29 @@ fun FilterDialog(onDismiss: () -> Unit) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(24.dp) // Increased padding for better spacing
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     TextButton(onClick = { showCategoryDialog = true }) {
-                        Text("운동종목", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                        Text("운동종목", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color.Black)
                     }
                     TextButton(onClick = { showPriceDialog = true }) {
-                        Text("가격", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                        Text("가격", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color.Black)
                     }
                     TextButton(onClick = { showOtherDialog = true }) {
-                        Text("기타", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                        Text("기타", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color.Black)
                     }
                 }
 
-                // Display selected filters
                 Spacer(modifier = Modifier.height(16.dp))
-                Text("선택한 운동종목: $selectedCategory", fontSize = 16.sp)
-                Text("선택한 가격: $selectedPrice", fontSize = 16.sp)
-                Text("선택한 기타 옵션: $selectedOther", fontSize = 16.sp)
 
-                // Display respective dialogs
+                Text("선택한 운동종목: $selectedCategory", fontSize = 18.sp, color = Color.Black)
+                Text("선택한 가격: $selectedPrice", fontSize = 18.sp, color = Color.Black)
+                Text("선택한 기타 옵션: $selectedOther", fontSize = 18.sp, color = Color.Black)
+
                 if (showCategoryDialog) {
                     FilterCategoryDialog(onDismiss = { showCategoryDialog = false }) { category ->
                         selectedCategory = category.joinToString(", ")
@@ -91,22 +91,21 @@ fun FilterDialog(onDismiss: () -> Unit) {
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp)) // Increased spacing before buttons
 
-                // Buttons to apply or cancel the filter
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     TextButton(onClick = { onDismiss() }) {
-                        Text("취소")
+                        Text("취소", fontSize = 16.sp, color = Color.Gray)
                     }
-                    Button(onClick = {
-                        // Apply action logic here
-                        onDismiss()
-                    }) {
-                        Text("적용하기")
+                    Button(
+                        onClick = {
+                            onDismiss()
+                        },
+                    ) {
+                        Text("적용하기", fontSize = 16.sp, color = Color.White)
                     }
                 }
             }
@@ -132,9 +131,9 @@ fun FilterCategoryDialog(onDismiss: () -> Unit, onCategorySelected: (List<String
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(24.dp)
             ) {
-                Text("운동종목", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text("운동종목", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color.Black)
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -162,29 +161,31 @@ fun FilterCategoryDialog(onDismiss: () -> Unit, onCategorySelected: (List<String
                                         } else {
                                             selectedOptions.remove(option)
                                         }
-                                    }
+                                    },
+                                    colors = CheckboxDefaults.colors(checkedColor = Color(0xFF4A90E2))
                                 )
-                                Text(text = option)
+                                Text(text = option, color = Color.Black)
                             }
                         }
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     TextButton(onClick = { onDismiss() }) {
-                        Text("취소")
+                        Text("취소", fontSize = 16.sp, color = Color.Gray)
                     }
-                    Button(onClick = {
-                        onCategorySelected(selectedOptions)
-                        onDismiss()
-                    }) {
-                        Text("적용하기")
+                    Button(
+                        onClick = {
+                            onCategorySelected(selectedOptions)
+                            onDismiss()
+                        },
+                    ) {
+                        Text("적용하기", fontSize = 16.sp, color = Color.White)
                     }
                 }
             }
@@ -203,19 +204,18 @@ fun FilterPriceDialog(onDismiss: () -> Unit, onPriceSelected: (String) -> Unit) 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(24.dp)
             ) {
-                Text("가격", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text("가격", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color.Black)
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Price Slider Implementation
                 var priceRange by remember { mutableStateOf(0f..200f) }
                 var frequencyRange by remember { mutableStateOf(2f..200f) }
                 var selectedPeriod by remember { mutableStateOf("전체 기간") }
 
                 Column(modifier = Modifier.fillMaxWidth()) {
-                    Text(text = "가격", fontSize = 16.sp)
+                    Text(text = "가격", fontSize = 18.sp, color = Color.Black)
 
                     Slider(
                         value = priceRange.start,
@@ -224,29 +224,29 @@ fun FilterPriceDialog(onDismiss: () -> Unit, onPriceSelected: (String) -> Unit) 
                         },
                         valueRange = 0f..200f,
                         steps = 200,
-                        modifier = Modifier.padding(horizontal = 16.dp)
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        colors = SliderDefaults.colors(thumbColor = Color(0xFF4A90E2), activeTrackColor = Color(0xFF4A90E2))
                     )
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "${priceRange.start.toInt()}만원", fontSize = 14.sp)
-                        Text(text = "${priceRange.endInclusive.toInt()}만원 이상", fontSize = 14.sp)
+                        Text(text = "${priceRange.start.toInt()}만원", fontSize = 16.sp, color = Color.Black)
+                        Text(text = "${priceRange.endInclusive.toInt()}만원 이상", fontSize = 16.sp, color = Color.Black)
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
-                    // Period & Frequency Sections
-                    Text("기간으로 이용할 수 있는 시설 보기", fontSize = 16.sp)
+                    Text("기간으로 이용할 수 있는 시설 보기", fontSize = 18.sp, color = Color.Black)
 
                     Row(modifier = Modifier.fillMaxWidth()) {
                         RadioButton(
                             selected = selectedPeriod == "전체 기간",
                             onClick = { selectedPeriod = "전체 기간" },
-                            colors = RadioButtonDefaults.colors(selectedColor = Color.Blue)
+                            colors = RadioButtonDefaults.colors(selectedColor = Color(0xFF4A90E2))
                         )
-                        Text(text = "전체 기간", modifier = Modifier.align(Alignment.CenterVertically))
+                        Text(text = "전체 기간", fontSize = 16.sp, color = Color.Black, modifier = Modifier.align(Alignment.CenterVertically))
                     }
 
                     Row(
@@ -258,16 +258,16 @@ fun FilterPriceDialog(onDismiss: () -> Unit, onPriceSelected: (String) -> Unit) 
                                 RadioButton(
                                     selected = selectedPeriod == period,
                                     onClick = { selectedPeriod = period },
-                                    colors = RadioButtonDefaults.colors(selectedColor = Color.Blue)
+                                    colors = RadioButtonDefaults.colors(selectedColor = Color(0xFF4A90E2))
                                 )
-                                Text(text = period, modifier = Modifier.align(Alignment.CenterVertically))
+                                Text(text = period, fontSize = 16.sp, color = Color.Black, modifier = Modifier.align(Alignment.CenterVertically))
                             }
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
-                    Text("횟수로 이용할 수 있는 시설 보기", fontSize = 16.sp)
+                    Text("횟수로 이용할 수 있는 시설 보기", fontSize = 18.sp, color = Color.Black)
 
                     Slider(
                         value = frequencyRange.start,
@@ -276,34 +276,35 @@ fun FilterPriceDialog(onDismiss: () -> Unit, onPriceSelected: (String) -> Unit) 
                         },
                         valueRange = 2f..200f,
                         steps = 198,
-                        modifier = Modifier.padding(horizontal = 16.dp)
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        colors = SliderDefaults.colors(thumbColor = Color(0xFF4A90E2), activeTrackColor = Color(0xFF4A90E2))
                     )
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "${frequencyRange.start.toInt()}회", fontSize = 14.sp)
-                        Text(text = "${frequencyRange.endInclusive.toInt()}회 이상", fontSize = 14.sp)
+                        Text(text = "${frequencyRange.start.toInt()}회", fontSize = 16.sp, color = Color.Black)
+                        Text(text = "${frequencyRange.endInclusive.toInt()}회 이상", fontSize = 16.sp, color = Color.Black)
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-                // Buttons
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     TextButton(onClick = { onDismiss() }) {
-                        Text("취소")
+                        Text("취소", fontSize = 16.sp, color = Color.Gray)
                     }
-                    Button(onClick = {
-                        onPriceSelected("${priceRange.start.toInt()}만원 ~ ${priceRange.endInclusive.toInt()}만원 이상")
-                        onDismiss()
-                    }) {
-                        Text("적용하기")
+                    Button(
+                        onClick = {
+                            onPriceSelected("${priceRange.start.toInt()}만원 ~ ${priceRange.endInclusive.toInt()}만원 이상")
+                            onDismiss()
+                        },
+                    ) {
+                        Text("적용하기", fontSize = 16.sp, color = Color.White)
                     }
                 }
             }
@@ -322,30 +323,30 @@ fun FilterOtherDialog(onDismiss: () -> Unit, onOtherSelected: (String) -> Unit) 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(24.dp)
             ) {
-                Text("기타", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text("기타", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color.Black)
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Implement 기타 filtering options here...
                 val otherOption = remember { mutableStateOf("기타 옵션 없음") }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     TextButton(onClick = { onDismiss() }) {
-                        Text("취소")
+                        Text("취소", fontSize = 16.sp, color = Color.Gray)
                     }
-                    Button(onClick = {
-                        onOtherSelected(otherOption.value)
-                        onDismiss()
-                    }) {
-                        Text("적용하기")
+                    Button(
+                        onClick = {
+                            onOtherSelected(otherOption.value)
+                            onDismiss()
+                        },
+                    ) {
+                        Text("적용하기", fontSize = 16.sp, color = Color.White)
                     }
                 }
             }

@@ -58,8 +58,17 @@ fun UserProfileScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column {
-                Text(text = "username", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Text(text = "email", fontSize = 16.sp, color = Color.Gray)
+                Text(
+                    text = "username",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black // Ensure text is clearly visible
+                )
+                Text(
+                    text = "email",
+                    fontSize = 16.sp,
+                    color = Color.DarkGray // A bit darker gray for better readability
+                )
             }
         }
 
@@ -69,22 +78,49 @@ fun UserProfileScreen(navController: NavController) {
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "포인트", fontSize = 16.sp, color = Color.Gray)
-                Text(text = "0P", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    text = "포인트",
+                    fontSize = 16.sp,
+                    color = Color.Gray
+                )
+                Text(
+                    text = "0P",
+                    fontSize = 22.sp, // Slightly larger for emphasis
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black // Darker for emphasis
+                )
             }
             Column(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "쿠폰", fontSize = 16.sp, color = Color.Gray)
-                Text(text = "0개", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    text = "쿠폰",
+                    fontSize = 16.sp,
+                    color = Color.Gray
+                )
+                Text(
+                    text = "0개",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
             }
             Column(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "찜", fontSize = 16.sp, color = Color.Gray)
-                Text(text = "0개", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    text = "찜",
+                    fontSize = 16.sp,
+                    color = Color.Gray
+                )
+                Text(
+                    text = "0개",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
             }
         }
 
@@ -99,33 +135,53 @@ fun UserProfileScreen(navController: NavController) {
                 Icon(
                     imageVector = Icons.Default.CardMembership, // Membership icon
                     contentDescription = "회원권",
-                    modifier = Modifier.size(40.dp)
+                    modifier = Modifier.size(40.dp),
+                    tint = Color(0xFF4A90E2) // Subtle blue for the icons
                 )
-                Text(text = "회원권", fontSize = 14.sp)
+                Text(
+                    text = "회원권",
+                    fontSize = 14.sp,
+                    color = Color.DarkGray
+                )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(
                     imageVector = Icons.Default.Receipt, // Payment history icon
                     contentDescription = "결제내역",
-                    modifier = Modifier.size(40.dp)
+                    modifier = Modifier.size(40.dp),
+                    tint = Color(0xFF4A90E2)
                 )
-                Text(text = "결제내역", fontSize = 14.sp)
+                Text(
+                    text = "결제내역",
+                    fontSize = 14.sp,
+                    color = Color.DarkGray
+                )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(
                     imageVector = Icons.Default.Chat, // Chat icon
                     contentDescription = "상담톡",
-                    modifier = Modifier.size(40.dp)
+                    modifier = Modifier.size(40.dp),
+                    tint = Color(0xFF4A90E2)
                 )
-                Text(text = "상담톡", fontSize = 14.sp)
+                Text(
+                    text = "상담톡",
+                    fontSize = 14.sp,
+                    color = Color.DarkGray
+                )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(
                     imageVector = Icons.Default.Star, // Review or feedback icon
                     contentDescription = "후기관리",
-                    modifier = Modifier.size(40.dp)
+                    modifier = Modifier.size(40.dp),
+                    tint = Color(0xFF4A90E2)
                 )
-                Text(text = "후기관리", fontSize = 14.sp)
+                Text(
+                    text = "후기관리",
+                    fontSize = 14.sp,
+                    color = Color.DarkGray
+                )
             }
         }
 
@@ -146,7 +202,11 @@ fun UserProfileScreen(navController: NavController) {
                     tint = Color.Gray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "시설등록요청")
+                Text(
+                    text = "시설등록요청",
+                    color = Color.Black,
+                    fontSize = 16.sp // Larger text for main options
+                )
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -170,7 +230,10 @@ fun UserProfileScreen(navController: NavController) {
                     tint = Color.Gray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "1:1 문의")
+                Text(text = "1:1 문의",
+                    color = Color.Black,
+                    fontSize = 16.sp
+                )
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -182,7 +245,9 @@ fun UserProfileScreen(navController: NavController) {
                     tint = Color.Gray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "FAQ")
+                Text(text = "FAQ",
+                    color = Color.Black,
+                    fontSize = 16.sp)
             }
             Spacer(modifier = Modifier.height(24.dp))
             Row(
@@ -195,7 +260,9 @@ fun UserProfileScreen(navController: NavController) {
                     tint = Color.Gray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "로그아웃", color = Color.Gray)
+                Text(text = "로그아웃",
+                    color = Color.Black,
+                    fontSize = 16.sp)
             }
         }
     }
