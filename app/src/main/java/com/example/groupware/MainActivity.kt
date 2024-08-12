@@ -120,7 +120,7 @@ fun BottomNavigationBar(navController: NavHostController) {
         BottomNavItem("홈", "mainScreen"),
         BottomNavItem("운동시설", "gymScreen"),
         BottomNavItem("찜", "favoriteScreen"),
-        BottomNavItem("마이다짐", "profileScreen"),
+        BottomNavItem("마이다짐", "userprofileScreen"),
     )
 
     NavigationBar(
@@ -148,7 +148,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         "mainScreen" -> Icons.Filled.Home
                         "gymScreen" -> Icons.Filled.FitnessCenter
                         "favoriteScreen" -> Icons.Filled.Favorite // GMobiledata 아이콘 대신 ShowChart 사용
-                        "profileScreen" -> Icons.Filled.AccountCircle
+                        "userprofileScreen" -> Icons.Filled.AccountCircle
                         else -> null
                     }
                     if (icon != null) {

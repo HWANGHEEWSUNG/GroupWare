@@ -110,7 +110,7 @@ fun ManagerLoginScreen(navController: NavController) {
         }
 
         Button(
-            onClick = { navController.navigate("gymScreen")},
+            onClick = { navController.navigate("profileScreen")},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
