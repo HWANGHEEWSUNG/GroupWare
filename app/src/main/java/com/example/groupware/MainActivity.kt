@@ -119,7 +119,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         BottomNavItem("홈", "mainScreen"),
         BottomNavItem("운동시설", "gymScreen"),
-        BottomNavItem("찜", "favoriteScreen"),
+        BottomNavItem("찜", "profileScreen"),
         BottomNavItem("마이다짐", "userprofileScreen"),
     )
 
