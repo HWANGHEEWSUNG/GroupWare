@@ -1,4 +1,4 @@
-package com.example.groupware.profileScreen
+package com.example.groupware.managerScreen
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -17,7 +17,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material.icons.filled.CheckCircle
@@ -45,11 +47,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.groupware.R
 
@@ -57,28 +57,40 @@ import com.example.groupware.R
 fun ProfileScreen(navController: NavController) {
     var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
 
+    // Image picker launcher
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         selectedImageUri = uri
     }
 
+    // Adding vertical scroll
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1B0A40))
+            .background(Color.White)
             .padding(16.dp)
     ) {
-        Column {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState()) // Scrollable column
+        ) {
             Spacer(modifier = Modifier.height(32.dp))
+
+            // User info section
             UserInfo(selectedImageUri) {
                 launcher.launch("image/*")
             }
             Spacer(modifier = Modifier.height(16.dp))
+
+            // User status section
             UserStatus()
             Spacer(modifier = Modifier.height(16.dp))
+
+            // User products section
             UserProducts()
             Spacer(modifier = Modifier.height(16.dp))
+
+            // Actions section
             Actions()
         }
     }
@@ -90,6 +102,7 @@ fun UserInfo(selectedImageUri: Uri?, onImageClick: () -> Unit) {
     var name by remember { mutableStateOf("김다짐") }
     var phoneNumber by remember { mutableStateOf("010-1234-1234") }
 
+    // Edit user info dialog
     if (showDialog) {
         EditUserInfoDialog(
             currentName = name,
@@ -104,6 +117,7 @@ fun UserInfo(selectedImageUri: Uri?, onImageClick: () -> Unit) {
     }
 
     Row(verticalAlignment = Alignment.CenterVertically) {
+        // User profile image
         if (selectedImageUri != null) {
             Image(
                 painter = rememberImagePainter(selectedImageUri),
@@ -123,12 +137,15 @@ fun UserInfo(selectedImageUri: Uri?, onImageClick: () -> Unit) {
                     .clickable(onClick = onImageClick)
             )
         }
+
         Spacer(modifier = Modifier.width(16.dp))
+
+        // User name and phone number
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = name, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.White)
+            Text(text = name, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.Black)
             Text(text = phoneNumber, color = Color.Gray)
             Button(
-                onClick = { /* 아무런 기능이 없도록 설정 */ },
+                onClick = { /* No action as per requirement */ },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Gray
                 ),
@@ -137,8 +154,10 @@ fun UserInfo(selectedImageUri: Uri?, onImageClick: () -> Unit) {
                 Text(text = "계약서", color = Color.White)
             }
         }
+
+        // Edit button
         IconButton(onClick = { showDialog = true }) {
-            Icon(imageVector = Icons.Default.MoreVert, contentDescription = null, tint = Color.White)
+            Icon(imageVector = Icons.Default.MoreVert, contentDescription = null, tint = Color.Black)
         }
     }
 }
@@ -153,6 +172,7 @@ fun EditUserInfoDialog(
     var name by remember { mutableStateOf(currentName) }
     var phoneNumber by remember { mutableStateOf(currentPhoneNumber) }
 
+    // Dialog for editing user info
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(text = "Edit User Info") },
@@ -185,9 +205,9 @@ fun EditUserInfoDialog(
 
 @Composable
 fun UserStatus() {
+    // User status section
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
     ) {
         StatusItem(label = "최근 방문", value = "오늘 방문", icon = Icons.Default.DateRange)
         Spacer(modifier = Modifier.height(8.dp))
@@ -230,31 +250,74 @@ fun StatusItem(label: String, value: String, icon: ImageVector) {
 
 @Composable
 fun UserProducts() {
+    // User products section with improved readability and no gray border
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White, shape = MaterialTheme.shapes.medium)
+            .background(Color(0xFFF7F7F7), shape = MaterialTheme.shapes.medium) // Light grey background for the section
             .padding(16.dp)
     ) {
-        Text(text = "이용중인 상품", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+        Text(text = "이용중인 상품", fontWeight = FontWeight.Bold,color = Color.Black, fontSize = 18.sp)
         Spacer(modifier = Modifier.height(8.dp))
-        ProductItem(name = "헬스 3개월", duration = "2023.07.28 - 2024.03.27", progress = "잔여 163일/28회")
-        ProductItem(name = "P.T 20회", duration = "2023.07.28 - 2024.01.27", progress = "잔여 103일/9회")
-        ProductItem(name = "운동복 3개월", duration = "2023.07.28 - 2024.03.27", progress = "잔여 163일")
+
+        // Product items
+        ProductItem(
+            name = "헬스 3개월",
+            duration = "2023.07.28 - 2024.03.27",
+            progress = "잔여 163일/28회"
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        ProductItem(
+            name = "P.T 20회",
+            duration = "2023.07.28 - 2024.01.27",
+            progress = "잔여 103일/9회"
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        ProductItem(
+            name = "운동복 3개월",
+            duration = "2023.07.28 - 2024.03.27",
+            progress = "잔여 163일"
+        )
     }
 }
 
 @Composable
 fun ProductItem(name: String, duration: String, progress: String) {
-    Column(modifier = Modifier.padding(vertical = 8.dp)) {
-        Text(text = name, fontWeight = FontWeight.Bold)
-        Text(text = duration, color = Color.Gray)
-        Text(text = progress, color = Color.Gray)
+    // Individual product item box without gray border
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White, shape = MaterialTheme.shapes.small) // White background for product items
+            .padding(12.dp) // Padding for better spacing
+    ) {
+        Text(
+            text = name,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            color = Color.Black
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Text(
+            text = duration,
+            fontSize = 14.sp,
+            color = Color.Gray
+        )
+        Spacer(modifier = Modifier.height(2.dp))
+
+        Text(
+            text = progress,
+            fontSize = 14.sp,
+            color = Color.Gray
+        )
     }
 }
 
 @Composable
 fun Actions() {
+    // Actions section
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
         Button(onClick = { /* TODO: Payment link */ }) {
             Text(text = "결제링크 전송하기")
@@ -267,6 +330,7 @@ fun Actions() {
 
 @Composable
 fun ContractScreen() {
+    // Contract screen content
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -277,10 +341,3 @@ fun ContractScreen() {
         Text(text = "계약서 내용이 여기에 표시됩니다.", fontSize = 18.sp)
     }
 }
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewProfileScreen() {
-//    ProfileScreen(navController = rememberNavController())
-//}
-//

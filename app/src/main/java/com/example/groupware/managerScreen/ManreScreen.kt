@@ -1,4 +1,4 @@
-package com.example.groupware.loginScreen
+package com.example.groupware.managerScreen
 
 import android.graphics.Bitmap
 import androidx.activity.compose.rememberLauncherForActivityResult
