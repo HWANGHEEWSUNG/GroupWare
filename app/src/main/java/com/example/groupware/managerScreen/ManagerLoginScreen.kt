@@ -39,8 +39,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.groupware.connectDB.ManagerLoginRequest
 import com.example.groupware.connectDB.UserLoginRequest
+import com.example.groupware.loginScreen.CenterItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.serialization.json.Json
 
 @Composable
 fun ManagerLoginScreen(navController: NavController) {
@@ -129,20 +131,9 @@ fun ManagerLoginScreen(navController: NavController) {
                 val managerInfo = ManagerInfo("0", email, password, "", "", "", "")
                 val responseListener = Response.Listener<String> { response ->
                     // Handle response here
-                    println("Response: $response")
-                    val gson = Gson()
-                    val type = object : TypeToken<Map<String, Any>>() {}.type
-                    val jsonMap: Map<String, String> = gson.fromJson(response, type)
-                    managerInfo.success = jsonMap["success"].toString()
-                    managerInfo.name = jsonMap["name"].toString()
-                    managerInfo.address = jsonMap["address"].toString()
-                    managerInfo.phone = jsonMap["phone"].toString()
-                    managerInfo.point = jsonMap["point"].toString()
-                    managerInfo.picture1 = decodeBase64ToBitmap(jsonMap["picture1"].toString())
-                    managerInfo.picture2 = decodeBase64ToBitmap(jsonMap["picture2"].toString())
-                    managerInfo.picture3 = decodeBase64ToBitmap(jsonMap["picture3"].toString())
-                    managerInfo.picture4 = decodeBase64ToBitmap(jsonMap["picture4"].toString())
-                    managerInfo.picture5 = decodeBase64ToBitmap(jsonMap["picture5"].toString())
+                    val centerItem = Json.decodeFromString<CenterItem>(response)
+
+                    println("Response: $centerItem")
 
                     if (managerInfo.success == "1") {
                         navController.navigate("mainManagerScreen")
@@ -191,11 +182,3 @@ fun ManagerLoginScreen(navController: NavController) {
     }
 }
 
-
-fun decodeBase64ToBitmap(base64String: String): Bitmap? {
-    // Base64 문자열을 디코딩하여 바이트 배열로 변환
-    val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
-
-    // 바이트 배열을 Bitmap으로 변환
-    return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-}

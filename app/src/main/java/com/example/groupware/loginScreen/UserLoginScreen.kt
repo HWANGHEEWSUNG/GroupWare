@@ -47,13 +47,13 @@ data class CenterItem(
     var telno: String = "",
     var registration: String = "",
     var type: String = "",
-    var comment: String = "",
+    var comment: String? = "",
     var point: String = "0",
-    var picture1: String = "",
-    var picture2: String = "",
-    var picture3: String = "",
-    var picture4: String = "",
-    var picture5: String = "",
+    var picture1: String? = "",
+    var picture2: String? = "",
+    var picture3: String? = "",
+    var picture4: String? = "",
+    var picture5: String? = "",
 )
 
 @Composable
@@ -154,22 +154,6 @@ fun LoginScreen(navController: NavController) {
                     val userData = Json.decodeFromString<UserInfo>(responseUser)
 
                     if (userData.success == "1") {
-                        val centerListResponseListener =
-                            Response.Listener<String> { responseCenters ->
-                                println("center: $responseCenters")
-                                val centerList = Json.decodeFromString<List<CenterItem>>(responseCenters)
-                                    .also{
-                                        println("123 $this")
-                                    }
-                            }
-
-                        val requestQueue: RequestQueue = Volley.newRequestQueue(context)
-                        requestQueue.add(
-                            CenterListRequest(
-                                centerListResponseListener,
-                                errorListener
-                            )
-                        )
                         navController.navigate("gymScreen")
                     } else {
                         Toast.makeText(context, "실패 ", Toast.LENGTH_SHORT).show()
