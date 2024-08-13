@@ -37,6 +37,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.groupware.connectDB.CenterListRequest
 import com.example.groupware.connectDB.UserLoginRequest
+import com.example.groupware.managerScreen.decodeBase64ToBitmap
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -146,7 +147,7 @@ fun LoginScreen(navController: NavController) {
                     println("Error: ${error.message}")
                 }
 
-                val responseListener = Response.Listener<String> { response ->
+                val loginResponseListener = Response.Listener<String> { response ->
                     // Handle response here
                     println("Response: $response")
                     val gson = Gson()
@@ -156,35 +157,38 @@ fun LoginScreen(navController: NavController) {
                     userInfo.name = jsonMap["name"].toString()
                     userInfo.phone = jsonMap["phone"].toString()
                     userInfo.birthDate = jsonMap["birth"].toString()
-                    val centerList:MutableList<CenterList> = mutableListOf()
-                    val centerListResponseListener = Response.Listener<String> { responseCenters ->
-                        val type2 = object : TypeToken<List<Map<String, Any>>>() {}.type
-                        val jsonMap2: List<Map<String, Any>> = gson.fromJson(responseCenters, type2)
-//
-                        jsonMap2.forEach { centerValue ->
-                            val center = CenterList(
-                                centerValue["name"].toString(),
-                                centerValue["address"].toString(),
-                                centerValue["phone"].toString(),
-                                centerValue["point"].toString(),
-                                centerValue["registration"].toString(),
-                                centerValue["type"].toString(),
-                                decodeBase64ToBitmap(centerValue["picture1"].toString()),
-                                decodeBase64ToBitmap(centerValue["picture2"].toString()),
-                                decodeBase64ToBitmap(centerValue["picture3"].toString()),
-                                decodeBase64ToBitmap(centerValue["picture4"].toString()),
-                                decodeBase64ToBitmap(centerValue["picture5"].toString()),
-                            )
 
-                            centerList.add(center)
-                        }
-
-                        println("ce: $centerList")
-                    }
                     if (userInfo.success == "1") {
+                        val centerListResponseListener =
+                            Response.Listener<String> { responseCenters ->
+                                //TODO using kotlinx-serialization
+                                val typeCenterList = object : TypeToken<List<Map<String, Any>>>() {}.type
+                                val centerList: List<CenterList> = gson.fromJson<List<Map<String, Any>>?>(responseCenters, typeCenterList)
+                                    .map { centerValue ->
+                                        CenterList(
+                                            centerValue["name"].toString(),
+                                            centerValue["address"].toString(),
+                                            centerValue["phone"].toString(),
+                                            centerValue["point"].toString(),
+                                            centerValue["registration"].toString(),
+                                            centerValue["type"].toString(),
+                                            decodeBase64ToBitmap(centerValue["picture1"].toString()),
+                                            decodeBase64ToBitmap(centerValue["picture2"].toString()),
+                                            decodeBase64ToBitmap(centerValue["picture3"].toString()),
+                                            decodeBase64ToBitmap(centerValue["picture4"].toString()),
+                                            decodeBase64ToBitmap(centerValue["picture5"].toString()),
+                                        )
+                                    }.also { println("ce: $this") }
+
+                            }
 
                         val requestQueue: RequestQueue = Volley.newRequestQueue(context)
-                        requestQueue.add(CenterListRequest(centerListResponseListener, errorListener))
+                        requestQueue.add(
+                            CenterListRequest(
+                                centerListResponseListener,
+                                errorListener
+                            )
+                        )
                         navController.navigate("gymScreen")
                     } else {
                         Toast.makeText(context, "실패 ", Toast.LENGTH_SHORT).show()
@@ -193,7 +197,7 @@ fun LoginScreen(navController: NavController) {
 
                 val registerRequest = UserLoginRequest(
                     userInfo,
-                    responseListener,
+                    loginResponseListener,
                     errorListener
                 )
                 val requestQueue: RequestQueue = Volley.newRequestQueue(context)

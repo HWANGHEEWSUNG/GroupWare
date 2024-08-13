@@ -6,9 +6,8 @@ import androidx.compose.runtime.MutableState
 import androidx.core.net.toUri
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
-import com.example.groupware.loginScreen.ManagerInfo
+import com.example.groupware.managerScreen.ManagerInfo
 import com.example.groupware.serverURL
-import com.example.groupware.managerScreen.CenterInfo
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -86,7 +85,7 @@ fun sendImgServer(
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             if (response.isSuccessful) {
                 val responseString = response.body()?.string()
-                Log.d("Response", responseString ?: "Response is null")
+                println(responseString ?: "Response is null")
 
                 // 서버 응답을 JSON으로 파싱
                 try {

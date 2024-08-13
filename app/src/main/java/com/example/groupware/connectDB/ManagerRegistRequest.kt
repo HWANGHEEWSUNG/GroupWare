@@ -1,8 +1,8 @@
 package com.example.groupware.connectDB
 
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.Response
-import com.example.groupware.loginScreen.ManagerInfo
+import com.android.volley.toolbox.StringRequest
+import com.example.groupware.managerScreen.ManagerInfo
 import com.example.groupware.serverURL
 
 class ManagerRegistRequest(

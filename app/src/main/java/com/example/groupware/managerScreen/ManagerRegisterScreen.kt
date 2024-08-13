@@ -216,8 +216,9 @@ fun ManreScreen(navController: NavController) {
                         registration = registration,
                         type = type
                     )
+                    println("managerInfo: $managerInfo")
                     sendImgServer(filePaths, managerInfo, context)
-                    navController.navigate("ManagerLoginScreen")
+//                    navController.navigate("ManagerLoginScreen")
                 },
                 enabled = termsAccepted,
                 shape = RoundedCornerShape(8.dp),
