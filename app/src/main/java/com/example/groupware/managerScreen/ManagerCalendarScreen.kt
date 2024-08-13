@@ -7,13 +7,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowLeft
@@ -203,30 +201,38 @@ private fun CustomCalendarView(
 }
 
 @Composable
-private fun DayContent(
-    day: Int
-) {
+private fun DayContent(day: Int) {
     val currentDay = LocalDate.now().dayOfMonth
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(40.dp), contentAlignment = Alignment.Center
+            .height(40.dp),
+        contentAlignment = Alignment.Center
     ) {
         if (day == currentDay) {
+            Box(
+                modifier = Modifier
+                    .size(32.dp) // 배경 박스의 크기를 지정합니다.
+                    .background(
+                        color = Color(0xFF50B4B0),
+                        shape = RoundedCornerShape(10.dp)
+                    ),
+                contentAlignment = Alignment.Center // 텍스트를 중앙에 위치시킵니다.
+            ) {
+                Text(
+                    text = "$day",
+                    fontSize = 16.sp,
+                    color = Color.White, // 현재 날짜 텍스트를 흰색으로 지정
+                    textAlign = TextAlign.Center
+                )
+            }
+        } else {
             Text(
                 text = "$day",
                 fontSize = 16.sp,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(32.dp)
-                    .background(
-                        Color(0xFF50B4B0), RoundedCornerShape(10.dp)
-                    )
+                color = Color.Black,
+                textAlign = TextAlign.Center
             )
-        } else {
-            Text(text = "$day", fontSize = 16.sp)
         }
     }
 
@@ -235,11 +241,11 @@ private fun DayContent(
             .fillMaxWidth()
             .height(60.dp)
             .clickable {
-
+                // 클릭 이벤트 처리
             },
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "오늘 신청한 회원 이름", color = Color.Black)
+        Text(text = "신청 회원", color = Color.Black)
     }
 }
 
