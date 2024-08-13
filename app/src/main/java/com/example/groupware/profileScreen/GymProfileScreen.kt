@@ -3,9 +3,12 @@ package com.example.groupware.profileScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.RadioButton
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,7 +29,8 @@ fun GymProfileScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()), // 스크롤 가능하도록 추가
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
@@ -52,9 +56,9 @@ fun GymProfileScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Member Information Section
+        // 운동 종목
         Text(
-            text = "운동 종목",
+            text = "운동 시설",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -72,21 +76,24 @@ fun GymProfileScreen(navController: NavController) {
 
             Checkbox(
                 checked = isChecked1,
-                onCheckedChange = { isChecked1 = it }
+                onCheckedChange = { isChecked1 = it },
+                colors = CheckboxDefaults.colors(checkedColor = Color(0xFF42A1F5)) // 커스텀 파란색 설정
             )
             Text(text = "헬스장")
             Spacer(modifier = Modifier.width(8.dp))
 
             Checkbox(
                 checked = isChecked2,
-                onCheckedChange = { isChecked2 = it }
+                onCheckedChange = { isChecked2 = it },
+                colors = CheckboxDefaults.colors(checkedColor = Color(0xFF42A1F5)) // 커스텀 파란색 설정
             )
             Text(text = "필라테스")
             Spacer(modifier = Modifier.width(8.dp))
 
             Checkbox(
                 checked = isChecked3,
-                onCheckedChange = { isChecked3 = it }
+                onCheckedChange = { isChecked3 = it },
+                colors = CheckboxDefaults.colors(checkedColor = Color(0xFF42A1F5)) // 커스텀 파란색 설정
             )
             Text(text = "요가")
 
@@ -94,7 +101,8 @@ fun GymProfileScreen(navController: NavController) {
 
             Checkbox(
                 checked = isChecked4,
-                onCheckedChange = { isChecked4 = it }
+                onCheckedChange = { isChecked4 = it },
+                colors = CheckboxDefaults.colors(checkedColor = Color(0xFF42A1F5)) // 커스텀 파란색 설정
             )
             Text(text = "골프")
         }
@@ -104,35 +112,80 @@ fun GymProfileScreen(navController: NavController) {
             var isChecked6 by remember { mutableStateOf(false) }
             var isChecked7 by remember { mutableStateOf(true) }
 
-
-
             Checkbox(
                 checked = isChecked5,
-                onCheckedChange = { isChecked5 = it }
+                onCheckedChange = { isChecked5 = it },
+                colors = CheckboxDefaults.colors(checkedColor = Color(0xFF42A1F5)) // 커스텀 파란색 설정
             )
             Text(text = "크로스핏")
 
             Checkbox(
                 checked = isChecked6,
-                onCheckedChange = { isChecked6 = it }
+                onCheckedChange = { isChecked6 = it },
+                colors = CheckboxDefaults.colors(checkedColor = Color(0xFF42A1F5)) // 커스텀 파란색 설정
             )
             Text(text = "실내 클라이밍")
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.width(8.dp))
 
             Checkbox(
                 checked = isChecked7,
-                onCheckedChange = { isChecked7 = it }
+                onCheckedChange = { isChecked7 = it },
+                colors = CheckboxDefaults.colors(checkedColor = Color(0xFF42A1F5)) // 커스텀 파란색 설정
             )
             Text(text = "테니스")
         }
 
+        Spacer(modifier = Modifier.height(16.dp))
 
-
-
-        // Member Level Radio Buttons
+        // 시설 사진 업로드
         Text(
-            text = "쇼핑등급",
+            text = "시설 사진 업로드",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            modifier = Modifier.align(Alignment.Start)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(id = R.drawable.logo), // Replace with the actual profile image
+                contentDescription = "Profile Picture",
+                modifier = Modifier.size(120.dp)
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.logo), // Replace with the actual profile image
+                contentDescription = "Profile Picture",
+                modifier = Modifier.size(130.dp)
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground), // Replace with the actual profile image
+                contentDescription = "Profile Picture",
+                modifier = Modifier.size(130.dp)
+            )
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground), // Replace with the actual profile image
+                contentDescription = "Profile Picture",
+                modifier = Modifier.size(80.dp)
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground), // Replace with the actual profile image
+                contentDescription = "Profile Picture",
+                modifier = Modifier.size(80.dp)
+            )
+        }
+
+
+        // 1일권 포인트 가격
+        Text(
+            text = "1일권 포인트 가격",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -141,89 +194,89 @@ fun GymProfileScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        var selectedLevel by remember { mutableStateOf("기본등급") }
+        Box(
+            modifier = Modifier
+                .size(width = 100.dp, height = 40.dp) // 가로 100.dp, 세로 40.dp 크기 설정
+                .background(Color.LightGray) // 회색 배경 설정
+                .align(Alignment.Start) // 화면 왼쪽에 배치
+        ) {
 
-        Column {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = selectedLevel == "기본등급",
-                    onClick = { selectedLevel = "기본등급" }
-                )
-                Text(text = "기본등급")
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = selectedLevel == "실버등급",
-                    onClick = { selectedLevel = "실버등급" }
-                )
-                Text(text = "실버등급")
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = selectedLevel == "골드등급",
-                    onClick = { selectedLevel = "골드등급" }
-                )
-                Text(text = "골드등급")
-            }
+            // Box 내부 글씨
+            Text(
+                text = "100 Point",
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.Center),
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                var autoChangeChecked by remember { mutableStateOf(false) }
-                Checkbox(
-                    checked = autoChangeChecked,
-                    onCheckedChange = { autoChangeChecked = it }
                 )
-                Text(text = "자동 등급 변경 사용 안함")
-            }
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+
+
+        // 운영 시간
+        Text(
+            text = "운영 시간",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            modifier = Modifier.align(Alignment.Start)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Box(
+            modifier = Modifier
+                .size(width = 130.dp, height = 40.dp) // 가로 100.dp, 세로 40.dp 크기 설정
+                .background(Color.LightGray) // 회색 배경 설정
+                .align(Alignment.Start) // 화면 왼쪽에 배치
+        ) {
+
+            // 운영 시간 Box 내부 글씨
+            Text(
+                text = "6:00am~23:00pm",
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.Center),
+
+                )
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        //영업장 주소 글씨
+        Text(
+            text = "영업장 주소",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            modifier = Modifier.align(Alignment.Start)
+        )
 
-        // Nickname and Email
-        Column(modifier = Modifier.fillMaxWidth()) {
-            Text(text = "닉네임", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            Text(text = "홍길동", fontSize = 16.sp)
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text(text = "계정", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            Text(text = "fityoufitness@naver.com", fontSize = 16.sp)
-        }
+        Box(
+            modifier = Modifier
+                .size(width = 130.dp, height = 40.dp) // 가로 100.dp, 세로 40.dp 크기 설정
+                .background(Color.LightGray) // 회색 배경 설정
+                .align(Alignment.Start) // 화면 왼쪽에 배치
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Password Change Button
-        Button(onClick = { /* Handle Password Change */ }) {
+        Button(
+            onClick = { /* Handle Password Change */ },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF42A1F5)
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally) // 버튼을 중앙에 배치
+        ) {
             Text(text = "비밀번호 변경")
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Marketing Preferences
-        Column(modifier = Modifier.fillMaxWidth()) {
-            var isSmsChecked by remember { mutableStateOf(false) }
-            var isEmailChecked by remember { mutableStateOf(false) }
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(
-                    checked = isSmsChecked,
-                    onCheckedChange = { isSmsChecked = it }
-                )
-                Text(text = "SMS 수신 동의")
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(
-                    checked = isEmailChecked,
-                    onCheckedChange = { isEmailChecked = it }
-                )
-                Text(text = "E-Mail 수신 동의")
-            }
-        }
+        Spacer(modifier = Modifier.height(24.dp)) // 버튼 아래 여백 추가
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewGymProfileScreen() {
     GymProfileScreen(navController = rememberNavController())
 }
-
