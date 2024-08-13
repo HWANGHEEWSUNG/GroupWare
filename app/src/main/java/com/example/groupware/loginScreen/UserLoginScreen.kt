@@ -1,6 +1,5 @@
 package com.example.groupware.loginScreen
 
-import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,24 +36,24 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.groupware.connectDB.CenterListRequest
 import com.example.groupware.connectDB.UserLoginRequest
-import com.example.groupware.managerScreen.decodeBase64ToBitmap
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-data class CenterList(
+@Serializable
+data class CenterItem(
+    var email: String = "",
     var name: String = "",
     var address: String = "",
-    var phone: String = "",
-    var point: String = "0",
+    var telno: String = "",
     var registration: String = "",
     var type: String = "",
-    var picture1: Bitmap? = null,
-    var picture2: Bitmap? = null,
-    var picture3: Bitmap? = null,
-    var picture4: Bitmap? = null,
-    var picture5: Bitmap? = null,
+    var comment: String? = "",
+    var point: String = "0",
+    var picture1: String? = "",
+    var picture2: String? = "",
+    var picture3: String? = "",
+    var picture4: String? = "",
+    var picture5: String? = "",
 )
 
 @Composable
@@ -142,61 +141,23 @@ fun LoginScreen(navController: NavController) {
         Button(
             onClick = {
 
-                val userInfo = UserInfo("0", email, password, 1, "", "", "")
+                val userInfo = UserInfo("0", email, password, "1", "", "", "")
 
                 val errorListener = Response.ErrorListener { error ->
                     // Handle error here
                     println("Error: ${error.message}")
                 }
 
-                val loginResponseListener = Response.Listener<String> { response ->
+                val loginResponseListener = Response.Listener<String> { responseUser ->
                     // Handle response here
-                    println("Response: $response")
-                    val gson = Gson()
-                    val type = object : TypeToken<Map<String, Any>>() {}.type
-                    val jsonMap: Map<String, String> = gson.fromJson(response, type)
-                    val obj = Json.decodeFromString<userIDData>(response)
-                    println("123: $obj")
-//                    userInfo.success = jsonMap["success"].toString()
-//                    userInfo.name = jsonMap["name"].toString()
-//                    userInfo.phone = jsonMap["phone"].toString()
-//                    userInfo.birthDate = jsonMap["birth"].toString()
+                    println("Response: $responseUser")
+                    val userData = Json.decodeFromString<UserInfo>(responseUser)
 
-//                    if (userInfo.success == "1") {
-//                        val centerListResponseListener =
-//                            Response.Listener<String> { responseCenters ->
-//                                //TODO using kotlinx-serialization
-//                                val typeCenterList = object : TypeToken<List<Map<String, Any>>>() {}.type
-//                                val centerList: List<CenterList> = gson.fromJson<List<Map<String, Any>>?>(responseCenters, typeCenterList)
-//                                    .map { centerValue ->
-//                                        CenterList(
-//                                            centerValue["name"].toString(),
-//                                            centerValue["address"].toString(),
-//                                            centerValue["phone"].toString(),
-//                                            centerValue["point"].toString(),
-//                                            centerValue["registration"].toString(),
-//                                            centerValue["type"].toString(),
-//                                            decodeBase64ToBitmap(centerValue["picture1"].toString()),
-//                                            decodeBase64ToBitmap(centerValue["picture2"].toString()),
-//                                            decodeBase64ToBitmap(centerValue["picture3"].toString()),
-//                                            decodeBase64ToBitmap(centerValue["picture4"].toString()),
-//                                            decodeBase64ToBitmap(centerValue["picture5"].toString()),
-//                                        )
-//                                    }.also { println("ce: $this") }
-//
-//                            }
-//
-//                        val requestQueue: RequestQueue = Volley.newRequestQueue(context)
-//                        requestQueue.add(
-//                            CenterListRequest(
-//                                centerListResponseListener,
-//                                errorListener
-//                            )
-//                        )
-//                        navController.navigate("gymScreen")
-//                    } else {
-//                        Toast.makeText(context, "실패 ", Toast.LENGTH_SHORT).show()
-//                    }
+                    if (userData.success == "1") {
+                        navController.navigate("gymScreen")
+                    } else {
+                        Toast.makeText(context, "실패 ", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 val registerRequest = UserLoginRequest(
@@ -239,4 +200,4 @@ fun LoginScreen(navController: NavController) {
 }
 
 @Serializable
-data class userIDData(val success: String, val name: String, val phone: String, val birth: String)
+data class UserData(val success: String, val name: String, val phone: String, val birth: String)

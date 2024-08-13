@@ -1,6 +1,9 @@
 package com.example.groupware.gymScreen
 
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,13 +25,13 @@ import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.filled.Loyalty
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,21 +39,49 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
 import com.example.groupware.R
+import com.example.groupware.connectDB.CenterListRequest
+import com.example.groupware.loginScreen.CenterItem
+import kotlinx.serialization.json.Json
 
 
 @Composable
 fun GymScreen(navController: NavController) {
     var showFilterDialog by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    var centerList = remember { mutableStateListOf<CenterItem>()}
+    val errorListener = Response.ErrorListener { error ->
+        // Handle error here
+        println("Error: ${error.message}")
+    }
+
+    val centerListResponseListener =
+        Response.Listener<String> { responseCenters ->
+            val decodedList = Json.decodeFromString<List<CenterItem>>(responseCenters)
+            centerList.clear() // 기존 리스트를 비운 후
+            centerList.addAll(decodedList) // 새 리스트 항목 추가
+        }
+
+    val requestQueue: RequestQueue = Volley.newRequestQueue(context)
+    requestQueue.add(
+        CenterListRequest(
+            centerListResponseListener,
+            errorListener
+        )
+    )
 
     Scaffold(
         topBar = {
@@ -68,8 +99,10 @@ fun GymScreen(navController: NavController) {
                         .fillMaxSize()
                         .padding(16.dp)
                 ) {
-                    items(4) {
-                        GymCard(navController = navController)
+                    centerList.forEach{ centerItem ->
+                        items(1) {
+                            GymCard(navController = navController, centerItem)
+                        }
                     }
                 }
             }
@@ -165,7 +198,7 @@ fun CustomIconButton(icon: ImageVector, text: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun GymCard(navController: NavController) {
+fun GymCard(navController: NavController, centerItem: CenterItem) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -180,17 +213,20 @@ fun GymCard(navController: NavController) {
                 .background(Color.White)
                 .padding(16.dp)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.gym), // Replace with actual image resource
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                contentScale = ContentScale.Crop
-            )
+            centerItem.picture1?.let{
+                Image(bitmap = decodeBase64ToBitmap(it), contentDescription = "")
+            }
+//            Image(
+//                painter = painterResource(id = R.drawable.gym), // Replace with actual image resource
+//                contentDescription = null,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .height(200.dp),
+//                contentScale = ContentScale.Crop
+//            )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "시청 피트니스온",
+                text = centerItem.name,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -204,25 +240,25 @@ fun GymCard(navController: NavController) {
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "(13) 서울 중구 무교동 · 0.1km",
+                    text = centerItem.address,
                     color = Color.Gray
                 )
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "예약필요",
+                text = centerItem.comment ?:"",
                 color = Color(0xFF6A1B9A)
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "8% 37,910원~/월",
+                text = "${centerItem.point}원/월",
                 color = Color(0xFFE53935),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "무료 프로그램: OT 2회 무료",
+                text = "예약필요",
                 color = Color.Gray
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -234,8 +270,10 @@ fun GymCard(navController: NavController) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewGymScreen() {
-    GymScreen(navController = rememberNavController())
+fun decodeBase64ToBitmap(base64String: String): ImageBitmap {
+    // Base64 문자열을 디코딩하여 바이트 배열로 변환
+    val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
+
+    // 바이트 배열을 Bitmap으로 변환
+    return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size).asImageBitmap()
 }

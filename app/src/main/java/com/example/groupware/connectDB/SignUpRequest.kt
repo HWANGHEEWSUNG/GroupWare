@@ -14,10 +14,10 @@ class SignUpRequest(
     private val parameters: Map<String, String> = mapOf(
         "userID" to userInfo.email,
         "password" to userInfo.password,
-        "level" to userInfo.level.toString(),
+        "level" to userInfo.level,
         "name" to userInfo.name,
         "phone" to userInfo.phone,
-        "birth" to userInfo.birthDate
+        "birth" to userInfo.birth
     )
 
     override fun getParams(): Map<String, String> {

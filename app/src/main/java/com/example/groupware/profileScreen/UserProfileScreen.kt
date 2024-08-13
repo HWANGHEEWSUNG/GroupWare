@@ -219,7 +219,7 @@ fun UserProfileScreen(navController: NavController) {
                     contentDescription = "친구초대",
                     tint = Color.Red
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier =  Modifier.width(8.dp))
                 Text(text = "친구초대", color = Color.Red)
             }
             Row(

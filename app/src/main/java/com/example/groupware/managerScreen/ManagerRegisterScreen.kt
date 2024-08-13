@@ -1,6 +1,5 @@
 package com.example.groupware.managerScreen
 
-import android.graphics.Bitmap
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -54,11 +53,11 @@ data class ManagerInfo(
     var point: String = "0",
     var registration: String = "",
     var type: String = "",
-    var picture1: Bitmap? = null,
-    var picture2: Bitmap? = null,
-    var picture3: Bitmap? = null,
-    var picture4: Bitmap? = null,
-    var picture5: Bitmap? = null,
+    var picture1: String = "",
+    var picture2: String = "",
+    var picture3: String = "",
+    var picture4: String = "",
+    var picture5: String = "",
 )
 
 @Composable
