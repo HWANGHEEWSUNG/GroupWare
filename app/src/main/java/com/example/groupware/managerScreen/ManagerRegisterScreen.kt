@@ -62,7 +62,7 @@ data class ManagerInfo(
 )
 
 @Composable
-fun ManreScreen(navController: NavController) {
+fun ManagerRegisterScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
@@ -219,7 +219,7 @@ fun ManreScreen(navController: NavController) {
                     )
                     println("managerInfo: $managerInfo")
                     sendImgServer(filePaths, managerInfo, context)
-//                    navController.navigate("ManagerLoginScreen")
+            navController.navigate("ManagerLoginScreen")
                 },
                 enabled = termsAccepted,
                 shape = RoundedCornerShape(8.dp),

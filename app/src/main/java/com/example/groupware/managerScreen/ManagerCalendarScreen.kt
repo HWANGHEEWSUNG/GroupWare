@@ -99,7 +99,7 @@ fun CalendarHeader(
         Spacer(modifier = Modifier.weight(1f))
         val currentMonth = YearMonth.of(year, month).month.toString()
         Text(
-            text = "$currentMonth   $year", fontSize = 24.sp, fontWeight = FontWeight.Bold
+            text = "$currentMonth   $year", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.Black
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -130,7 +130,7 @@ fun CalendarWeekHeader() {
                     text = day,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF9D9D9D)
+                    color = Color.Black
                 )
             }
         }
@@ -239,7 +239,7 @@ private fun DayContent(
             },
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "오늘 신청한 회원 이름")
+        Text(text = "오늘 신청한 회원 이름", color = Color.Black)
     }
 }
 
