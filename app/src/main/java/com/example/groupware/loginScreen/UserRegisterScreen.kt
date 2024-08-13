@@ -30,16 +30,18 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.groupware.connectDB.SignUpRequest
+import kotlinx.serialization.Serializable
 
 
+@Serializable
 class UserInfo(
     var success: String = "",
     val email: String = "",
     val password: String = "",
-    val level: Int = 0, //
+    val level: String = "0", //
     var name: String = "",
     var phone: String = "",
-    var birthDate: String = "" // birthYear + birthMonth + birthDay 결합된 값
+    var birth: String = "" // birthYear + birthMonth + birthDay 결합된 값
 )
 
 
@@ -188,7 +190,7 @@ fun RegisterScreen(navController: NavController) {
                     println("Error: ${error.message}")
                 }
 
-                val userInfo = UserInfo("0", email, password, 1, name, phone, birthYear + birthMonth + birthDay)
+                val userInfo = UserInfo("0", email, password, "1", name, phone, birthYear + birthMonth + birthDay)
                 val registerRequest = SignUpRequest(
                     userInfo,
                     responseListener,

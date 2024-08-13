@@ -17,7 +17,7 @@ class SignUpRequest(
         "level" to userInfo.level.toString(),
         "name" to userInfo.name,
         "phone" to userInfo.phone,
-        "birth" to userInfo.birthDate
+        "birth" to userInfo.birth
     )
 
     override fun getParams(): Map<String, String> {
