@@ -34,7 +34,7 @@ import com.example.groupware.R
          horizontalAlignment = Alignment.CenterHorizontally
      ) {
          TopBar()
-         Spacer(modifier = Modifier.height(16.dp))
+         Spacer(modifier = Modifier.height(30.dp))
          AttendanceCard()
          Spacer(modifier = Modifier.height(16.dp))
          IconRow(navController)
@@ -107,8 +107,8 @@ import com.example.groupware.R
                  horizontalArrangement = Arrangement.SpaceBetween,
                  modifier = Modifier.fillMaxWidth()
              ) {
-                 Text(text = "캘린더", fontSize = 14.sp, color = Color.Gray)
-                 Text(text = "10.17  20:00 ~ 20:50", fontSize = 14.sp, color = Color.Gray)
+                 Text(text = "캘린더", fontSize = 14.sp, color = Color.Black)
+                 Text(text = "10.17  20:00 ~ 20:50", fontSize = 14.sp, color = Color.Black)
              }
          }
      }
@@ -156,7 +156,7 @@ import com.example.groupware.R
              )
          }
          Spacer(modifier = Modifier.height(4.dp))
-         Text(text = text, fontSize = 14.sp)
+         Text(text = text, fontSize = 14.sp,color = Color.Black )
      }
  }
 
@@ -173,7 +173,7 @@ import com.example.groupware.R
                  verticalAlignment = Alignment.CenterVertically,
                  modifier = Modifier.fillMaxWidth()
              ) {
-                 Text(text = "실시간 출석", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                 Text(text = "실시간 출석", fontSize = 15.sp, fontWeight = FontWeight.Bold,color = Color.Black)
                  Row(verticalAlignment = Alignment.CenterVertically) {
                      Text(text = "더보기", fontSize = 14.sp, color = Color.Black)
                      Spacer(modifier = Modifier.width(4.dp))
@@ -216,7 +216,7 @@ import com.example.groupware.R
                  .clip(CircleShape)
          )
          Spacer(modifier = Modifier.width(8.dp))
-         Text(text = name, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+         Text(text = name, fontSize = 14.sp, fontWeight = FontWeight.Bold,color = Color.Black)
          Spacer(modifier = Modifier.width(8.dp))
          Text(text = activity, fontSize = 12.sp, color = Color.Gray)
          Spacer(modifier = Modifier.weight(1f))

@@ -145,7 +145,7 @@ fun ManagerLoginScreen(navController: NavController) {
                     managerInfo.picture5 = decodeBase64ToBitmap(jsonMap["picture5"].toString())
 
                     if (managerInfo.success == "1") {
-                        navController.navigate("profileScreen")
+                        navController.navigate("mainManagerScreen")
                     } else {
                         Toast.makeText(context, "로그인 실패 ${managerInfo.success}", Toast.LENGTH_SHORT)
                             .show()
@@ -179,7 +179,7 @@ fun ManagerLoginScreen(navController: NavController) {
             Text(text = "비밀번호 찾기", color = Color.Gray)
             Spacer(modifier = Modifier.width(16.dp))
             Button(
-                onClick = {navController.navigate("ManreScreen")},
+                onClick = {navController.navigate("ManagerRegisterScreen")},
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)

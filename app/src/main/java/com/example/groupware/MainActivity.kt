@@ -37,13 +37,13 @@ import com.example.groupware.entryScreen.TheVeryFirstScreen
 import com.example.groupware.graphScreen.GraphScreen
 import com.example.groupware.gymScreen.GymScreen
 import com.example.groupware.loginScreen.LoginScreen
-import com.example.groupware.managerScreen.ManreScreen
 import com.example.groupware.loginScreen.RegisterScreen
 import com.example.groupware.mainScreen.MainScreen
 import com.example.groupware.managerScreen.ManagerScreen
 import com.example.groupware.gymScreen.GymInfoScreen
 import com.example.groupware.managerScreen.ManagerLoginScreen
 import com.example.groupware.managerScreen.MainManagerScreen
+import com.example.groupware.managerScreen.ManagerRegisterScreen
 import com.example.groupware.profileScreen.GymProfileScreen
 import com.example.groupware.managerScreen.ProfileScreen
 import com.example.groupware.profileScreen.UserProfileScreen
@@ -90,7 +90,7 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("gymprofileScreen") { GymProfileScreen(navController) }
                 composable("graphScreen") { GraphScreen(navController) }
                 composable("mainManagerScreen") { MainManagerScreen(navController) }
-                composable("manreScreen") { ManreScreen(navController) }
+                composable("managerRegisterScreen") { ManagerRegisterScreen(navController) }
 
 
             }

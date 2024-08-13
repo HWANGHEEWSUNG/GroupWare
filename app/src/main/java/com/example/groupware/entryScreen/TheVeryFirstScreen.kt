@@ -2,7 +2,14 @@ package com.example.groupware.entryScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -14,12 +21,10 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.groupware.R // R 파일을 명시적으로 가져옴
+import com.example.groupware.R
 
 @Composable
 fun TheVeryFirstScreen(navController: NavController) {
@@ -65,7 +70,7 @@ fun TheVeryFirstScreen(navController: NavController) {
 
         // 관리자 버튼
         Button(
-            onClick = { navController.navigate("managerloginScreen") },
+            onClick = { navController.navigate("ManagerloginScreen") },
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
             modifier = Modifier
