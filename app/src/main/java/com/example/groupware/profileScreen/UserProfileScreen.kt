@@ -30,9 +30,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.groupware.R
 
 @Composable
@@ -230,7 +232,8 @@ fun UserProfileScreen(navController: NavController) {
                     tint = Color.Gray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "1:1 문의",
+                Text(
+                    text = "1:1 문의",
                     color = Color.Black,
                     fontSize = 16.sp
                 )
@@ -245,9 +248,11 @@ fun UserProfileScreen(navController: NavController) {
                     tint = Color.Gray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "FAQ",
+                Text(
+                    text = "FAQ",
                     color = Color.Black,
-                    fontSize = 16.sp)
+                    fontSize = 16.sp
+                )
             }
             Spacer(modifier = Modifier.height(24.dp))
             Row(
@@ -260,10 +265,23 @@ fun UserProfileScreen(navController: NavController) {
                     tint = Color.Gray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "로그아웃",
+                Text(
+                    text = "로그아웃",
                     color = Color.Black,
-                    fontSize = 16.sp)
+                    fontSize = 16.sp
+                )
             }
         }
     }
 }
+
+
+        @Preview(showBackground = true)
+        @Composable
+        fun PreviewUserProfileScreen() {
+            UserProfileScreen(navController = rememberNavController())
+        }
+
+
+
+
