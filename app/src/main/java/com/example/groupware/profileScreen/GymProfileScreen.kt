@@ -238,6 +238,7 @@ fun GymProfileScreen(navController: NavController) {
 
                 )
         }
+        Spacer(modifier = Modifier.height(8.dp))
 
         //영업장 주소 글씨
         Text(
@@ -250,7 +251,7 @@ fun GymProfileScreen(navController: NavController) {
 
         Box(
             modifier = Modifier
-                .size(width = 130.dp, height = 40.dp) // 가로 100.dp, 세로 40.dp 크기 설정
+                .size(width = 300.dp, height = 40.dp) // 가로 100.dp, 세로 40.dp 크기 설정
                 .background(Color.LightGray) // 회색 배경 설정
                 .align(Alignment.Start) // 화면 왼쪽에 배치
         )
