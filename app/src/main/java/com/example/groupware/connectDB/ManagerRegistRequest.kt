@@ -18,11 +18,11 @@ class ManagerRegistRequest(
 
     private val parameters: Map<String, String> = mapOf(
         "userID" to managerInfo.email,
-        "password" to managerInfo.password,
+//        "password" to managerInfo.password,
         "level" to "2",
         "name" to managerInfo.name,
         "address" to managerInfo.address,
-        "telno" to managerInfo.phone,
+        "telno" to managerInfo.telno,
         "address" to managerInfo.address,
         "registration" to managerInfo.registration,
         "type" to managerInfo.type,

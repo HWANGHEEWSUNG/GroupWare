@@ -36,7 +36,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 @Composable
-fun ManagerScreen(navController: NavController) {
+fun ManagerCalendarScreen(navController: NavController) {
     Column {
         val currentDate = LocalDate.now()
         var year by remember { mutableIntStateOf(currentDate.year) }

@@ -1,8 +1,5 @@
 package com.example.groupware.managerScreen
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.util.Base64
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -38,10 +35,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.groupware.connectDB.ManagerLoginRequest
-import com.example.groupware.connectDB.UserLoginRequest
 import com.example.groupware.loginScreen.CenterItem
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.serialization.json.Json
 
 @Composable
@@ -128,14 +122,15 @@ fun ManagerLoginScreen(navController: NavController) {
         Button(
             onClick = {
 
-                val managerInfo = ManagerInfo("0", email, password, "", "", "", "")
+                val managerInfo = CenterItem(success = "0", email = email, password = password)
+//                val managerInfo = ManagerInfo("0", email, password, "", "", "", "")
                 val responseListener = Response.Listener<String> { response ->
                     // Handle response here
                     val centerItem = Json.decodeFromString<CenterItem>(response)
 
-                    println("Response: $centerItem")
+                    println("Response: $response")
 
-                    if (managerInfo.success == "1") {
+                    if (centerItem.success == "1") {
                         navController.navigate("mainManagerScreen")
                     } else {
                         Toast.makeText(context, "로그인 실패 ${managerInfo.success}", Toast.LENGTH_SHORT)

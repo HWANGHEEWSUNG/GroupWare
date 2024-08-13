@@ -46,7 +46,7 @@ class UserInfo(
 
 
 @Composable
-fun RegisterScreen(navController: NavController) {
+fun UserRegisterScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }

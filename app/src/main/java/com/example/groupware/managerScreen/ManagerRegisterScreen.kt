@@ -42,22 +42,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.groupware.connectDB.sendImgServer
+import org.w3c.dom.Comment
 
 data class ManagerInfo(
     var success: String = "",
     var email: String = "",
-    var password: String = "",
+//    var password: String = "",
     var name: String = "",
     var address: String = "",
-    var phone: String = "",
+    var telno: String = "",
     var point: String = "0",
     var registration: String = "",
     var type: String = "",
-    var picture1: String = "",
-    var picture2: String = "",
-    var picture3: String = "",
-    var picture4: String = "",
-    var picture5: String = "",
+    var comment: String = "",
+    var picture1: String? = "",
+    var picture2: String? = "",
+    var picture3: String? = "",
+    var picture4: String? = "",
+    var picture5: String? = "",
 )
 
 @Composable
@@ -210,15 +212,15 @@ fun ManagerRegisterScreen(navController: NavController) {
                     managerInfo = managerInfo.copy(
                         email = email,
                         name = name,
-                        password = password,
+//                        password = password,
                         address = address,
-                        phone = phoneNumber,
+                        telno = phoneNumber,
                         registration = registration,
                         type = type
                     )
                     println("managerInfo: $managerInfo")
                     sendImgServer(filePaths, managerInfo, context)
-            navController.navigate("ManagerLoginScreen")
+                    navController.navigate("ManagerLoginScreen")
                 },
                 enabled = termsAccepted,
                 shape = RoundedCornerShape(8.dp),

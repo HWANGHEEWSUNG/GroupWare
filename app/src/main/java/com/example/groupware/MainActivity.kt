@@ -36,10 +36,10 @@ import com.example.groupware.entryScreen.EntryScreen
 import com.example.groupware.entryScreen.TheVeryFirstScreen
 import com.example.groupware.graphScreen.GraphScreen
 import com.example.groupware.gymScreen.GymScreen
-import com.example.groupware.loginScreen.LoginScreen
-import com.example.groupware.loginScreen.RegisterScreen
+import com.example.groupware.loginScreen.UserLoginScreen
+import com.example.groupware.loginScreen.UserRegisterScreen
 import com.example.groupware.mainScreen.MainScreen
-import com.example.groupware.managerScreen.ManagerScreen
+import com.example.groupware.managerScreen.ManagerCalendarScreen
 import com.example.groupware.gymScreen.GymInfoScreen
 import com.example.groupware.managerScreen.ManagerLoginScreen
 import com.example.groupware.managerScreen.MainManagerScreen
@@ -81,11 +81,11 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("profileScreen") { ProfileScreen(navController) }
                 composable("gymScreen") { GymScreen(navController) }
                 composable("gyminfoScreen") { GymInfoScreen(navController) }
-                composable("loginScreen") { LoginScreen(navController) }
+                composable("userloginScreen") { UserLoginScreen(navController) }
                 composable("managerloginScreen") { ManagerLoginScreen(navController) }
-                composable("registerScreen") { RegisterScreen(navController) }
+                composable("userregisterScreen") { UserRegisterScreen(navController) }
                 composable("userprofileScreen") { UserProfileScreen(navController) }
-                composable("managerScreen") { ManagerScreen(navController) }
+                composable("managerCalendarScreen") { ManagerCalendarScreen(navController) }
                 composable("TheVeryFirstScreen") { TheVeryFirstScreen(navController) }
                 composable("gymprofileScreen") { GymProfileScreen(navController) }
                 composable("graphScreen") { GraphScreen(navController) }

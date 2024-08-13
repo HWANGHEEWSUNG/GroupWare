@@ -34,13 +34,14 @@ import androidx.navigation.NavController
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.example.groupware.connectDB.CenterListRequest
 import com.example.groupware.connectDB.UserLoginRequest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 @Serializable
 data class CenterItem(
+    var success: String = "",
+    var password: String = "",
     var email: String = "",
     var name: String = "",
     var address: String = "",
@@ -57,7 +58,7 @@ data class CenterItem(
 )
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun UserLoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var rememberId by remember { mutableStateOf(false) }
