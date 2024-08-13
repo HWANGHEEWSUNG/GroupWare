@@ -29,6 +29,13 @@ fun GymProfileScreen(navController: NavController) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Text(
+            text = "시설 정보 수정 페이지",
+            fontWeight = FontWeight.Bold,
+            fontSize = 19.sp
+        )
+
         // Profile Picture and Name
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_foreground), // Replace with the actual profile image
@@ -37,8 +44,8 @@ fun GymProfileScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "홍길동",
-            fontSize = 20.sp,
+            text = "Fityou피트니스 역삼 1호점",
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
         )
@@ -47,7 +54,7 @@ fun GymProfileScreen(navController: NavController) {
 
         // Member Information Section
         Text(
-            text = "회원 정보",
+            text = "운동 종목",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -61,29 +68,67 @@ fun GymProfileScreen(navController: NavController) {
             var isChecked1 by remember { mutableStateOf(true) }
             var isChecked2 by remember { mutableStateOf(false) }
             var isChecked3 by remember { mutableStateOf(true) }
+            var isChecked4 by remember { mutableStateOf(true) }
 
             Checkbox(
                 checked = isChecked1,
                 onCheckedChange = { isChecked1 = it }
             )
-            Text(text = "신규회원")
+            Text(text = "헬스장")
             Spacer(modifier = Modifier.width(8.dp))
 
             Checkbox(
                 checked = isChecked2,
                 onCheckedChange = { isChecked2 = it }
             )
-            Text(text = "아임웹기초강의")
+            Text(text = "필라테스")
             Spacer(modifier = Modifier.width(8.dp))
 
             Checkbox(
                 checked = isChecked3,
                 onCheckedChange = { isChecked3 = it }
             )
-            Text(text = "도매그룹")
+            Text(text = "요가")
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Checkbox(
+                checked = isChecked4,
+                onCheckedChange = { isChecked4 = it }
+            )
+            Text(text = "골프")
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            var isChecked5 by remember { mutableStateOf(true) }
+            var isChecked6 by remember { mutableStateOf(false) }
+            var isChecked7 by remember { mutableStateOf(true) }
+
+
+
+            Checkbox(
+                checked = isChecked5,
+                onCheckedChange = { isChecked5 = it }
+            )
+            Text(text = "크로스핏")
+
+            Checkbox(
+                checked = isChecked6,
+                onCheckedChange = { isChecked6 = it }
+            )
+            Text(text = "실내 클라이밍")
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Checkbox(
+                checked = isChecked7,
+                onCheckedChange = { isChecked7 = it }
+            )
+            Text(text = "테니스")
+        }
+
+
+
 
         // Member Level Radio Buttons
         Text(
@@ -141,7 +186,7 @@ fun GymProfileScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(text = "계정", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            Text(text = "plipop@naver.com", fontSize = 16.sp)
+            Text(text = "fityoufitness@naver.com", fontSize = 16.sp)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
