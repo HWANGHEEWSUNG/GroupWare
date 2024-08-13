@@ -218,9 +218,9 @@ import com.example.groupware.R
          Spacer(modifier = Modifier.width(8.dp))
          Text(text = name, fontSize = 14.sp, fontWeight = FontWeight.Bold,color = Color.Black)
          Spacer(modifier = Modifier.width(8.dp))
-         Text(text = activity, fontSize = 12.sp, color = Color.Gray)
+         Text(text = activity, fontSize = 12.sp, color = Color.Black)
          Spacer(modifier = Modifier.weight(1f))
-         Text(text = time, fontSize = 12.sp, color = Color.Gray)
+         Text(text = time, fontSize = 12.sp,color = Color.Black)
          if (attendanceStatus.isNotEmpty()) {
              Spacer(modifier = Modifier.width(8.dp))
              Text(
