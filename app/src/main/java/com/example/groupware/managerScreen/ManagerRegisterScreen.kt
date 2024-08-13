@@ -211,6 +211,7 @@ fun ManreScreen(navController: NavController) {
                     managerInfo = managerInfo.copy(
                         email = email,
                         name = name,
+                        password = password,
                         address = address,
                         phone = phoneNumber,
                         registration = registration,
