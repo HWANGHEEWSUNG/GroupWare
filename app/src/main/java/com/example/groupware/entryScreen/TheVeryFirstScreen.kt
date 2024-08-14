@@ -49,7 +49,8 @@ fun TheVeryFirstScreen(navController: NavController) {
 
         Text(
             text = "다양한 운동을 포인트로 손쉽게 예약할 수 있는 운동 플랫폼",
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp
         )
 
         Spacer(modifier = Modifier.height(60.dp))
