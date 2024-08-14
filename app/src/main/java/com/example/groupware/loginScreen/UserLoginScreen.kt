@@ -155,7 +155,7 @@ fun UserLoginScreen(navController: NavController) {
                     val userData = Json.decodeFromString<UserInfo>(responseUser)
 
                     if (userData.success == "1") {
-                        navController.navigate("gymScreen")
+                        navController.navigate("gymScreen/$responseUser")
                     } else {
                         Toast.makeText(context, "실패 ", Toast.LENGTH_SHORT).show()
                     }

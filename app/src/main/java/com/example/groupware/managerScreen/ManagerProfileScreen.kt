@@ -54,7 +54,7 @@ import coil.compose.rememberImagePainter
 import com.example.groupware.R
 
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun ManagerProfileScreen(navController: NavController) {
     var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
 
     // Image picker launcher

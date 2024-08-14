@@ -28,10 +28,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.groupware.entryScreen.EntryScreen
 import com.example.groupware.entryScreen.TheVeryFirstScreen
 import com.example.groupware.graphScreen.GraphScreen
@@ -45,7 +47,7 @@ import com.example.groupware.managerScreen.ManagerLoginScreen
 import com.example.groupware.managerScreen.MainManagerScreen
 import com.example.groupware.managerScreen.ManagerRegisterScreen
 import com.example.groupware.profileScreen.GymProfileScreen
-import com.example.groupware.managerScreen.ProfileScreen
+import com.example.groupware.managerScreen.ManagerProfileScreen
 import com.example.groupware.profileScreen.UserProfileScreen
 import com.example.groupware.ui.theme.GroupWareTheme
 
@@ -74,17 +76,18 @@ fun AppContent(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
 
     Column(modifier = Modifier.fillMaxSize()) {
+        var responseUser = ""
         Box(modifier = Modifier.weight(1f)) {
             NavHost(navController, startDestination = "EntryScreen") {
                 composable("entryScreen") { EntryScreen(navController) }
                 composable("mainScreen") { MainScreen(navController) }
-                composable("profileScreen") { ProfileScreen(navController) }
-                composable("gymScreen") { GymScreen(navController) }
+                composable("profileScreen") { ManagerProfileScreen(navController) }
+//                composable("gymScreen") { GymScreen(navController) }
                 composable("gyminfoScreen") { GymInfoScreen(navController) }
                 composable("userloginScreen") { UserLoginScreen(navController) }
                 composable("managerloginScreen") { ManagerLoginScreen(navController) }
                 composable("userregisterScreen") { UserRegisterScreen(navController) }
-                composable("userprofileScreen") { UserProfileScreen(navController) }
+//                composable("userprofileScreen") { UserProfileScreen(navController) }
                 composable("managerCalendarScreen") { ManagerCalendarScreen(navController) }
                 composable("TheVeryFirstScreen") { TheVeryFirstScreen(navController) }
                 composable("gymprofileScreen") { GymProfileScreen(navController) }
@@ -92,7 +95,28 @@ fun AppContent(modifier: Modifier = Modifier) {
                 composable("mainManagerScreen") { MainManagerScreen(navController) }
                 composable("managerRegisterScreen") { ManagerRegisterScreen(navController) }
 
+                composable(
+                    "gymScreen/{responseUser}",
+                    arguments = listOf(navArgument("responseUser") { type = NavType.StringType })
+                ) { backStackEntry ->
+                    responseUser = backStackEntry.arguments?.getString("responseUser")?: ""
+                    GymScreen(
+                        navController,
+                        responseUser
+                    )
 
+                }
+
+                composable(
+                    "userprofileScreen/{responseUser}",
+                    arguments = listOf(navArgument("responseUser") { type = NavType.StringType })
+                ) { backStackEntry ->
+                    UserProfileScreen(
+                        navController,
+                        backStackEntry.arguments?.getString("responseUser")
+                    )
+
+                }
             }
         }
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -100,22 +124,22 @@ fun AppContent(modifier: Modifier = Modifier) {
 
         if (currentRoute in listOf(
                 "mainScreen",
-                "gymScreen",
+                "gymScreen/{responseUser}",
                 "favoriteScreen",
                 "userprofileScreen",
             )
         ) {
-            BottomNavigationBar(navController)
+            BottomNavigationBar(navController, responseUser)
         }
     }
 }
 
 @Composable
-fun BottomNavigationBar(navController: NavHostController) {
+fun BottomNavigationBar(navController: NavHostController, responseUser: String) {
     val items = listOf(
         BottomNavItem("홈", "gymScreen"),
         BottomNavItem("달력", "managerScreen"),
-        BottomNavItem("찜", "profileScreen"),
+        BottomNavItem("프로필", "profileScreen/$responseUser"),
         BottomNavItem("마이다짐", "userprofileScreen"),
     )
 

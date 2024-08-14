@@ -36,9 +36,16 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.groupware.R
+import com.example.groupware.loginScreen.UserInfo
+import kotlinx.serialization.json.Json
 
 @Composable
-fun UserProfileScreen(navController: NavController) {
+fun UserProfileScreen(navController: NavController, responseUser: String?) {
+    val userData = responseUser?.let {
+        Json.decodeFromString<UserInfo>(responseUser)
+    } ?: run{
+        UserInfo()
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -61,13 +68,13 @@ fun UserProfileScreen(navController: NavController) {
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(
-                    text = "username",
+                    text = userData.name,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black // Ensure text is clearly visible
                 )
                 Text(
-                    text = "email",
+                    text = userData.email,
                     fontSize = 16.sp,
                     color = Color.DarkGray // A bit darker gray for better readability
                 )
@@ -274,14 +281,3 @@ fun UserProfileScreen(navController: NavController) {
         }
     }
 }
-
-
-        @Preview(showBackground = true)
-        @Composable
-        fun PreviewUserProfileScreen() {
-            UserProfileScreen(navController = rememberNavController())
-        }
-
-
-
-

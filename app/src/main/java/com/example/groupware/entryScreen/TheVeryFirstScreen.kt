@@ -56,7 +56,7 @@ fun TheVeryFirstScreen(navController: NavController) {
 
         // 일반 사용자 버튼
         Button(
-            onClick = { navController.navigate("loginScreen") },
+            onClick = { navController.navigate("userloginScreen") },
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A90E2)),
             modifier = Modifier

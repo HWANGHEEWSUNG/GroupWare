@@ -1,7 +1,6 @@
 package com.example.groupware.gymScreen
 
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import androidx.compose.foundation.Image
@@ -30,6 +29,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -42,9 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,37 +50,37 @@ import androidx.navigation.NavController
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.example.groupware.R
 import com.example.groupware.connectDB.CenterListRequest
 import com.example.groupware.loginScreen.CenterItem
 import kotlinx.serialization.json.Json
 
 
 @Composable
-fun GymScreen(navController: NavController) {
+fun GymScreen(navController: NavController, responseUser: String?) {
     var showFilterDialog by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    var centerList = remember { mutableStateListOf<CenterItem>()}
+    var centerList = remember { mutableStateListOf<CenterItem>() }
     val errorListener = Response.ErrorListener { error ->
         // Handle error here
         println("Error: ${error.message}")
     }
 
-    val centerListResponseListener =
-        Response.Listener<String> { responseCenters ->
-            val decodedList = Json.decodeFromString<List<CenterItem>>(responseCenters)
-            centerList.clear() // 기존 리스트를 비운 후
-            centerList.addAll(decodedList) // 새 리스트 항목 추가
-        }
+    LaunchedEffect(Unit) {
+        val centerListResponseListener =
+            Response.Listener<String> { responseCenters ->
+                val decodedList = Json.decodeFromString<List<CenterItem>>(responseCenters)
+                centerList.clear() // 기존 리스트를 비운 후
+                centerList.addAll(decodedList) // 새 리스트 항목 추가
+            }
 
-    val requestQueue: RequestQueue = Volley.newRequestQueue(context)
-    requestQueue.add(
-        CenterListRequest(
-            centerListResponseListener,
-            errorListener
+        val requestQueue: RequestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(
+            CenterListRequest(
+                centerListResponseListener,
+                errorListener
+            )
         )
-    )
-
+    }
     Scaffold(
         topBar = {
             CustomTopAppBar(onFilterClick = { showFilterDialog = true })
@@ -99,7 +97,7 @@ fun GymScreen(navController: NavController) {
                         .fillMaxSize()
                         .padding(16.dp)
                 ) {
-                    centerList.forEach{ centerItem ->
+                    centerList.forEach { centerItem ->
                         items(1) {
                             GymCard(navController = navController, centerItem)
                         }
@@ -213,7 +211,7 @@ fun GymCard(navController: NavController, centerItem: CenterItem) {
                 .background(Color.White)
                 .padding(16.dp)
         ) {
-            centerItem.picture1?.let{
+            centerItem.picture1?.let {
                 Image(bitmap = decodeBase64ToBitmap(it), contentDescription = "")
             }
 //            Image(
@@ -246,7 +244,7 @@ fun GymCard(navController: NavController, centerItem: CenterItem) {
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = centerItem.comment ?:"",
+                text = centerItem.comment ?: "",
                 color = Color(0xFF6A1B9A)
             )
             Spacer(modifier = Modifier.height(8.dp))
