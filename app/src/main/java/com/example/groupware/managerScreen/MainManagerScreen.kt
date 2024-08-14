@@ -123,7 +123,7 @@ import com.example.groupware.R
          IconButton(onClick = { navController.navigate("profileScreen") }) {
              IconWithText(R.drawable.profile, "회원", 24.dp)
          }
-         IconButton(onClick = { navController.navigate("managerScreen") }) {
+         IconButton(onClick = { navController.navigate("managerCalendarScreen") }) {
              IconWithText(R.drawable.calendar, "일정", 24.dp)
          }
          IconButton(onClick = { navController.navigate("graphScreen") }) {

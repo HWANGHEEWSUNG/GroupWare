@@ -56,7 +56,6 @@ const val serverURL = "http://192.168.45.126/"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             GroupWareTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -126,7 +125,7 @@ fun AppContent(modifier: Modifier = Modifier) {
                 "mainScreen",
                 "gymScreen/{responseUser}",
                 "favoriteScreen",
-                "userprofileScreen",
+                "userprofileScreen/{responseUser}",
             )
         ) {
             BottomNavigationBar(navController, responseUser)
@@ -140,7 +139,7 @@ fun BottomNavigationBar(navController: NavHostController, responseUser: String) 
         BottomNavItem("홈", "gymScreen"),
         BottomNavItem("달력", "managerScreen"),
         BottomNavItem("프로필", "profileScreen/$responseUser"),
-        BottomNavItem("마이다짐", "userprofileScreen"),
+        BottomNavItem("마이다짐", "userprofileScreen/$responseUser"),
     )
 
     NavigationBar(
@@ -168,7 +167,7 @@ fun BottomNavigationBar(navController: NavHostController, responseUser: String) 
                         "gymScreen" -> Icons.Filled.Home
                         "managerScreen" -> Icons.Filled.CalendarMonth
                         "favoriteScreen" -> Icons.Filled.Favorite // GMobiledata 아이콘 대신 ShowChart 사용
-                        "userprofileScreen" -> Icons.Filled.AccountCircle
+                        "userprofileScreen/{responseUser}" -> Icons.Filled.AccountCircle
                         else -> null
                     }
                     if (icon != null) {

@@ -245,7 +245,7 @@ private fun DayContent(day: Int) {
             },
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "신청 회원", color = Color.Black)
+        Text(text = "김인텔", color = Color.Black)
     }
 }
 
